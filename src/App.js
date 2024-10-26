@@ -5,6 +5,7 @@ import Footer from './components/Footer.js';
 import Home from './pages/Home.js';
 import About from './pages/About.js';
 import Explore from './pages/Explore.js';
+import DataManagement from './pages/DataManagement.js';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <main>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-          <Route path="/sobre-nosotros" element={<About/>}/>
           <Route path="/explorar" element={<Explore/>}/>
+          <Route path="/sobre-nosotros" element={<About/>}/>
+          <Route path="/datos" element={<DataManagement/>}/>
         </Routes>
       </main>
       <footer>
