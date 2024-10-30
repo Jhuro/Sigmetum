@@ -1,50 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Filter from '../components/Filter.js';
 import SpeciesCard from '../components/SpeciesCard.js';
-import MainSearcher from '../components/SearchBar.js';
 import SpeciesData from '../test/TestData.js';
+import ButtonPrincipal from '../components/ButtonPrincipal.js';
+import { downloadCSV } from '../utilities/CSVfunctions.js';
 
 const Explore = () => {
+
+  const [filteredSpecies, setFilteredSpecies] = useState(SpeciesData);
+
+  const handleFilterChange = (filteredData) => {
+    setFilteredSpecies((prev) => {
+      if (JSON.stringify(prev) !== JSON.stringify(filteredData)) {
+        return filteredData;
+      }
+      return prev;
+    });
+  };
+
   return (
     <div className="gap-1 px-6 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col w-80">
-            <h2 className="text-[#111813] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Filtros</h2>
-            <div className="flex px-4 py-2">
-              <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-gray-200 text-black text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span className="truncate">Limpiar todo</span>
-              </button>
-            </div>
-            <div className="flex px-4 py-2">
-              <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#14b83a] text-white text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span className="truncate">Aplicar todo</span>
-              </button>
-            </div>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
-            <Filter/>
+            <h2 className="text-[#0C1811] sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Filtros</h2>
+            <Filter data={SpeciesData} onFilterChange={handleFilterChange}/>
           </div>
-          
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <MainSearcher/>
-            <div className="grid gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {SpeciesData.map((species, index) => (
-                <SpeciesCard
-                  key={index}
-                  image={species.image}
-                  usualName={species.usualName}
-                  scientificName={species.scientificName}
-                />
+
+          <div className="layout-content-container flex flex-col flex-1 whitespace-nowrap">
+            <div className="flex items-center gap-4">
+              <ButtonPrincipal onClick={() => downloadCSV(filteredSpecies)} text='Descargar CSV'/>
+              <ButtonPrincipal text='Ordenar A-Z'/>
+            </div>
+            <div className="grid gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-4">
+              {filteredSpecies.map((species, index) => (
+                <SpeciesCard key={index} species={species} />
               ))}
             </div>
           </div>
