@@ -14,10 +14,10 @@ const Home = () => {
           >
               <div className="flex flex-col gap-5 text-left">
                 <h1 className="text-[#F9FBFA] text-4xl font-black leading-tight tracking-[-0.033em] sm:text-6xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]">
-                  Sigmetum - Explora la biodiversidad por regiones
+                  Sigmetum - Explora la vegetación por Andalucía
                 </h1>
                 <h2 className="text-[#F9FBFA] text-sm font-normal leading-normal sm:text-2xl sm:font-normal sm:leading-normal">
-                Descubre y visualiza la riqueza de la vegetación y las especies en diversas zonas geográficas, explorando la biodiversidad de nuestro planeta de manera interactiva
+                Descubre y visualiza la riqueza de especies en diversas zonas geográficas, explorando la biodiversidad de manera interactiva
                 </h2>
                 <Link to="/explorar">
                   <ButtonPrincipal text='Buscar'/>
