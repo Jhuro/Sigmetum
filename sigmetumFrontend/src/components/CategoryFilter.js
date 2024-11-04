@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import ButtonAlternative from '../components/ButtonAlternative.js';
+import ButtonAlternative from './ButtonAlternative.js';
+import FilterSearchBar from './FilterSearchBar.js';
 
 const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -43,6 +44,7 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
 
       {isExpanded && !blocked && (
         <>
+        <FilterSearchBar placeholderText={categoryNames[category]}/>
           <div className="space-y-3 py-1">
             {items.map((item) => (
               <label key={item} className="flex items-center space-x-2">

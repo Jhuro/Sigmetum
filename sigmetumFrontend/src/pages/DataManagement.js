@@ -1,34 +1,48 @@
 import React from 'react';
-import UploadButton from '../components/UploadButton.js';
+import ButtonPrincipal from '../components/ButtonPrincipal.js'
+import ButtonAlternative from '../components/ButtonAlternative.js'
+import Table from '../components/Table.js'
+import SpeciesData from '../test/TestData.js';
 
 const DataManagement = () => {
+
     return (
-      <div className="bg-[#F9FBFA] layout-container flex h-full grow flex-col">
-        <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-            <div className="flex flex-wrap justify-between gap-3 p-4">
-              <div className="flex min-w-72 flex-col gap-3">
-                <p className="text-[#111418] tracking-light text-[32px] font-bold leading-tight">Subir un archivo</p>
-                <p className="text-[#637588] text-sm font-normal leading-normal">Seleccionar un archivo</p>
-              </div>
+      <div className="w-full max-w-screen overflow-hidden px-2">
+        <div className="layout-content-container flex flex-col w-full max-w-screen-lg mx-auto">
+          <div className="flex w-full flex-wrap justify-between gap-3 p-4">
+            <div className="flex min-w-72 flex-col gap-3">
+              <p className="text-[#111418] tracking-light text-[32px] font-bold leading-tight">
+                Administrar datos
+              </p>
             </div>
-            <div className="flex flex-col p-4">
-              <div className="flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-[#dce0e5] px-6 py-14">
-                <p className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] max-w-[480px] text-center">Seleccionar un archivo</p>
-                <UploadButton/>
-              </div>
+          </div>
+          <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+            Elegir conjunto de datos
+          </h3>
+          
+          <div className="flex justify-stretch w-full">
+            <div className="flex w-full gap-3 flex-wrap px-4 py-3 justify-end">
+              <label className="flex flex-col w-full min-w-40 flex-1">
+                <select
+                  className="form-input w-full flex resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border border-[#dce0e5] bg-white focus:border-[#dce0e5] h-14 placeholder:text-[#637588] p-[15px] text-base font-normal leading-normal"
+                >
+                  <option value="one">Elegir conjunto de datos</option>
+                  <option value="two">Data_3_11_2024.csv</option>
+                  <option value="three">Data_4_11_2024.csv</option>
+                </select>
+              </label>
+              <ButtonAlternative text="Aplicar cambios" />
+              <ButtonPrincipal text="Ordenar A-Z" dropdownOptions={["Ordenar A-Z", "Ordenar Z-A"]} />
             </div>
-            <div className="flex px-4 py-3">
-              <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 flex-1 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span className="truncate">Cargar archivo</span>
-              </button>
+          </div>
+          <div className="px-4 py-3 w-full overflow-hidden">
+            <div className="flex w-full max-w-full overflow-hidden rounded-xl border border-[#dce0e5] bg-[#F9FBFA]">
+              <Table data={SpeciesData}/>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
 };
 
 export default DataManagement;

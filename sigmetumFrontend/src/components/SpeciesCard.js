@@ -11,16 +11,16 @@ const SpeciesCard = ({species}) => {
     <div>
       <div
         onClick={openDialog}
-        className="cursor-pointer bg-[#F9FBFA] flex items-center gap-4 rounded-lg min-h-[72px] px-2 py-2 border border-[#99BBA8] hover:bg-[#99BBA8]"
+        className="cursor-pointer bg-[#F9FBFA] flex items-center gap-2 rounded-lg min-h-[72px] px-2 py-2 border border-[#99BBA8] hover:bg-[#99BBA8]"
       >
         <div
-          className="bg-center bg-no-repeat bg-cover aspect-square rounded-lg size-14"
+          className="bg-center bg-no-repeat bg-cover aspect-square rounded-lg min-w-14 min-h-14"
           style={{
             backgroundImage: 'url("' + species.image + '")'
           }}
         ></div>
         <div className="flex flex-col justify-center">
-          <p className="text-[#0C1811] text-base italic font-medium leading-normal">
+          <p className="text-[#0C1811] text-base italic font-medium leading-normal whitespace-normal overflow-hidden text-ellipsis">
             {species.scientificName}
           </p>
         </div>
