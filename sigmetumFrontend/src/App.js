@@ -31,7 +31,7 @@ function App() {
       <div className="flex min-h-screen">
         {showSideMenu && <LateralMenu/>}
 
-        <main className='flex-grow  bg-[#F9FBFA]'>
+        <main className='flex-grow bg-[#F9FBFA]'>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/explorar" element={<Explore/>}/>

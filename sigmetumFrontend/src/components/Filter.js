@@ -66,7 +66,7 @@ const Filter = ({ data, onFilterChange}) => {
   };
 
   return (
-    <div>
+    <>
       <div className="flex justify-center px-4 py-2 mx-auto">
         <ButtonAlternative onClick={handleClearAllFilters} text='Eliminar todos los filtros'/>
       </div>
@@ -80,7 +80,7 @@ const Filter = ({ data, onFilterChange}) => {
           selected={selectedFilters[category] || new Set()}
         />
       ))}
-    </div>
+    </>
   );
 };
 

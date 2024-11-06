@@ -1,6 +1,5 @@
 import React from 'react';
 import FileUpload from '../components/FileUpload.js';
-import ButtonPrincipal from '../components/ButtonPrincipal.js';
 
 const DataManagement = () => {
     return (
@@ -15,9 +14,7 @@ const DataManagement = () => {
             <div className="flex flex-col p-4">
               <FileUpload/>
             </div>
-            <div className="flex px-4 py-3 justify-center">
-              <ButtonPrincipal text="Cargar archivos"/>
-            </div>
+            
           </div>
         </div>
       </div>

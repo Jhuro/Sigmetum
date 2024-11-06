@@ -8,7 +8,7 @@ const SpeciesCard = ({species}) => {
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <div>
+    <>
       <div
         onClick={openDialog}
         className="cursor-pointer bg-[#F9FBFA] flex items-center gap-2 rounded-lg min-h-[72px] px-2 py-2 border border-[#99BBA8] hover:bg-[#99BBA8]"
@@ -27,7 +27,7 @@ const SpeciesCard = ({species}) => {
       </div>
 
       <Dialog isOpen={isDialogOpen} onClose={closeDialog} species = {species}/>
-    </div>
+      </>
   );
 };
 

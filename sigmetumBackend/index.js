@@ -1,16 +1,19 @@
 const express = require('express');
 const cors = require('cors');
+const uploadRoutes = require('./endpoints/upload.js');
+const listFiles = require('./endpoints/listFiles.js');
+const getData = require('./endpoints/getData.js');
 
 const app = express();
+const PORT = 8000;
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/message', (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
+app.use(uploadRoutes);
+app.use(listFiles);
+app.use(getData);
 
-app.listen(8000, () => {
-    console.log(`Server is running on port 8000.`);
-  });
-  
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});

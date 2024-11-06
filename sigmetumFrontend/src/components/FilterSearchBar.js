@@ -3,10 +3,10 @@ import React from 'react';
 const FilterSearchBar = ({placeholderText}) => {
 
     return (
-        <label className="flex flex-col min-w-40 h-10 mb-2 w-full">
-            <div className="flex w-full items-stretch rounded-xl border h-full">
+        <label className="form-input bg-[#F9FBFA] w-full flex resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border border-[#15B659] focus:border-[#15B659] h-14 placeholder:text-[#0C1811] placeholder:text-[#637588] text-base font-normal leading-normal">
+            <div className="flex bg-[#F9FBFA] w-full items-stretch rounded-xl h-full">
                 <div
-                className="text-[#0C1811] flex bg-[#F9FBFA] items-center justify-center pl-[15px] rounded-l-xl border border-[#99BBA8] border-r-0"
+                className="text-[#0C1811] bg-[#F9FBFA] flex items-center justify-center pl-[15px] rounded-l-xl"
                 data-icon="MagnifyingGlass"
                 data-size="20px"
                 data-weight="regular"
@@ -24,7 +24,7 @@ const FilterSearchBar = ({placeholderText}) => {
                 <input
                 id="buscar"
                 placeholder={`${placeholderText}`}
-                className="form-input flex w-full min-w-0 resize-none overflow-hidden text-[#0C1811] focus:outline-none focus:ring-0 bg-[#F9FBFA] h-full placeholder:text-[#99BBA8] px-[15px] text-sm font-normal sm:text-base border border-[#99BBA8] border-l-0 rounded-r-xl"
+                className="form-input bg-[#F9FBFA] flex w-full min-w-0 resize-none overflow-hidden text-[#0C1811] focus:outline-none focus:ring-0 h-full placeholder:text-[#99BBA8] px-[15px] text-sm font-normal sm:text-base"
                 />
             </div>
         </label>
