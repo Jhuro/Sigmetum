@@ -4,6 +4,9 @@ import ButtonPrincipal from './ButtonPrincipal';
 
 const FileUploadForm = () => {
   const [files, setFiles] = useState([]);
+  const [dialogMessage, setDialogMessage] = useState('');
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogType, setDialogType] = useState('');
 
   function normalizeFileName(fileName) {
 
@@ -36,11 +39,25 @@ const FileUploadForm = () => {
           body: formData,
         });
 
-        console.log(await response.json());
-      } catch (error) {
-        console.error('Error uploading file:', error);
+        const result = await response.json();
+      if (response.ok) {
+        setDialogMessage('¡Archivo subido con éxito!');
+        setDialogType('success');
+      } else {
+        setDialogMessage(`Error en la subida: ${result.message || 'Inténtalo de nuevo'}`);
+        setDialogType('error');
       }
+    } catch (error) {
+      setDialogMessage('Error al subir el archivo. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogType('error');
     }
+    setDialogVisible(true); // Mostrar diálogo
+  }
+};
+
+  const closeDialog = () => {
+    setDialogVisible(false);
+    setDialogMessage('');
   };
 
   return (
@@ -67,6 +84,20 @@ const FileUploadForm = () => {
       </div>
       <div className="flex px-4 py-3 justify-center">
           <ButtonPrincipal text="Cargar archivos" onClick={handleSubmit}/>
+
+          {dialogVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 className={`font-bold ${dialogType === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+              {dialogType === 'success' ? 'Éxito' : 'Error'}
+            </h2>
+            <p className="mt-2">{dialogMessage}</p>
+            <button onClick={closeDialog} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
       </div>
       </>
   );

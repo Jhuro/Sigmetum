@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import ButtonPrincipal from "./ButtonPrincipal";
 
-const Table = ({ data, rowsPerPage = 10  }) => {
+const Table = ({ data, rowsPerPage = 5  }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   if (!data || data.length === 0) {
     return <p>No hay datos disponibles.</p>;
   }
+
 
   const columnNames = Object.keys(data[0]);
 
@@ -28,6 +31,35 @@ const Table = ({ data, rowsPerPage = 10  }) => {
     }
   };
 
+  const handleSort = (key) => {
+    setSortConfig((prevConfig) => {
+        if (prevConfig.key === key) {
+            return {
+                key,
+                direction: prevConfig.direction === 'asc' ? 'desc' : 'asc'
+            };
+        } else {
+            return { key, direction: 'asc' };
+        }
+    });
+  };
+/*
+  const sortedData = [...data].sort((a, b) => {
+    const { key, direction } = sortConfig;
+    if (key === null) return 0;
+
+    const aValue = a[key];
+    const bValue = b[key];
+    const order = direction === 'asc' ? 1 : -1;
+
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return (aValue - bValue) * order;
+    } else {
+        return aValue.toString().localeCompare(bValue.toString()) * order;
+    }
+  });
+  */
+
   return (
     <div className="overflow-x-auto w-full">
       <table className="w-full">
@@ -37,8 +69,10 @@ const Table = ({ data, rowsPerPage = 10  }) => {
               <th
                 key={col}
                 className="px-4 py-2 text-left text-sm font-bold text-[#F9FBFA] border-b border-[#99BBA8]"
+                onClick={() => handleSort(col)}
               >
                 {col.charAt(0).toUpperCase() + col.slice(1)}
+                {sortConfig.key === col && (sortConfig.direction === 'asc' ? '↑' : '↓')}
               </th>
             ))}
           </tr>
@@ -51,7 +85,16 @@ const Table = ({ data, rowsPerPage = 10  }) => {
                   key={col}
                   className="px-4 py-2 text-sm text-[#0C1811] border-b border-[#99BBA8]"
                 >
-                  {row[col]}
+                  {Array.isArray(row[col]) ? (
+                            row[col].map((item, index) => (
+                                <span key={index}>
+                                    {item}
+                                    <br />
+                                </span>
+                            ))
+                        ) : (
+                            row[col]
+                        )}
                 </td>
               ))}
             </tr>
@@ -60,21 +103,11 @@ const Table = ({ data, rowsPerPage = 10  }) => {
       </table>
 
       <div className="flex justify-between items-center mt-4">
-        <button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-        >
-          Anterior
-        </button>
+
+      <ButtonPrincipal text="Anterior" onClick={handlePreviousPage} disabled={currentPage === totalPages}/>
+
         <span>Página {currentPage} de {totalPages}</span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-        >
-          Siguiente
-        </button>
+        <ButtonPrincipal text="Anterior" onClick={handleNextPage} disabled={currentPage === totalPages}/>
       </div>
     </div>
   );

@@ -12,7 +12,23 @@ const convertExcelToJson = (filePath) => {
     const workbook = XLSX.readFile(filePath);
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
-    return XLSX.utils.sheet_to_json(worksheet);
+    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+    const processedData = jsonData.map(row => {
+        const processedRow = {};
+
+        for (const [key, value] of Object.entries(row)) {
+            if (typeof value === 'string' && value.includes(',')) {
+                processedRow[key] = value.split(',').map(item => item.trim());
+            } else {
+                processedRow[key] = value;
+            }
+        }
+
+        return processedRow;
+    });
+
+    return processedData;
 };
 
 function formatFileName(originalName) {

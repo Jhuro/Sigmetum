@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Home from './pages/Home.js';
@@ -6,14 +6,35 @@ import About from './pages/About.js';
 import Explore from './pages/Explore.js';
 import DataManagement from './pages/DataManagement.js';
 import FilesUpload from './pages/FilesUpload.js';
-import LateralMenu from './components/LateralMenu.js';
 import Navbar from './components/Navbar.js';
 import Footer from './components/Footer.js';
+import Sidebar from './components/Sidebar.js';
+import Filter from './components/Filter.js';
+
+import SpeciesData from './test/TestData.js';
+import speciesData from './test/TestData.js';
 
 function App() {
 
+  const [filteredSpecies, setFilteredSpecies] = useState(SpeciesData);
+
+  const handleFilterChange = (filteredData) => {
+    setFilteredSpecies((prev) => {
+      if (JSON.stringify(prev) !== JSON.stringify(filteredData)) {
+        return filteredData;
+      }
+      return prev;
+    });
+  };
+
   const location = useLocation();
-  const showSideMenu = ["/cargar-archivos", "/administrar-archivos", "/administrar-datos", ].includes(location.pathname);
+  const showSideMenu = ["/cargar-archivos", "/administrar-archivos", "/administrar-datos", "/explorar"].includes(location.pathname);
+
+  const menuOptions = [
+    { id: 'filtro', name: 'Filtro',  component: <Filter data={speciesData} onFilterChange={handleFilterChange}/>, icon:"filter_alt"},
+    { id: 'administrarDatos', name: 'Administrar datos', icon:"database", link:"/administrar-datos"},
+    { id: 'cargarArchivos', name: 'Cargar archivos', icon:"upload", link:"/cargar-archivos"},
+  ];
 
   return (
     <div className="App">
@@ -28,13 +49,14 @@ function App() {
             <Navbar/>
           </div>
       </header>
+
       <div className="flex min-h-screen">
-        {showSideMenu && <LateralMenu/>}
+        {showSideMenu && <Sidebar menuOptions={menuOptions}/>}
 
         <main className='flex-grow bg-[#F9FBFA]'>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
-            <Route path="/explorar" element={<Explore/>}/>
+            <Route path="/explorar" element={<Explore filteredSpecies={filteredSpecies}/>}/>
             <Route path="/sobre-nosotros" element={<About/>}/>
             <Route path="/cargar-archivos" element={<FilesUpload/>}/>
             <Route path="/administrar-archivos" element={<FilesUpload/>}/>

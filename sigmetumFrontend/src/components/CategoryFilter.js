@@ -4,6 +4,7 @@ import FilterSearchBar from './FilterSearchBar.js';
 
 const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [searchText, setSearchText] = useState("");
   
   const categoryNames = {
     province: "Provincia",
@@ -16,7 +17,7 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
     serieType: "Tipo de Serie",
     vegetationSeries: "Serie de Vegetación",
     potentialVegetation: "Vegetación Potencial",
-    scientificName: "Nombre Científico",
+    characteristicSpecies: "Especies Características"
   };
 
   const toggleCategory = () => {
@@ -33,6 +34,10 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
     onChange(category, 'clear');
   };
 
+  const filteredItems = items.filter((item) =>
+    String(item).toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <div className="w-full max-w-md mx-auto bg-[#F9FBFA] rounded-lg shadow-lg p-2 mt-2 mb-2">
       <p
@@ -44,21 +49,24 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
 
       {isExpanded && !blocked && (
         <>
-        <FilterSearchBar placeholderText={categoryNames[category]}/>
+        <FilterSearchBar placeholderText={categoryNames[category]} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
           <div className="space-y-3 py-1">
-            {items.map((item) => (
-              <label key={item} className="flex items-center space-x-2">
-                <input
-                
-                  type="checkbox"
-                  name={`${category}-${item}`}
-                  checked={selected.has(item)}
-                  onChange={() => handleCheckboxChange(item)}
-                  className="appearance-none h-6 w-6 border-2 border-[#15B659] rounded-md cursor-pointer checked:bg-[#15B659] checked:border-transparent"
-                />
-                <span className="text-[#0C1811] text-1xl capitalize">{item}</span>
-              </label>
-            ))}
+          {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <label key={item} className="flex items-center cursor-pointer space-x-2">
+                  <input
+                    type="checkbox"
+                    name={`${category}-${item}`}
+                    checked={selected.has(item)}
+                    onChange={() => handleCheckboxChange(item)}
+                    className="appearance-none h-6 w-6 border-2 border-[#15B659] rounded-md cursor-pointer hover:bg-[#15B659] checked:bg-[#15B659] checked:border-transparent"
+                  />
+                  <span className="text-[#0C1811] text-1xl capitalize">{item}</span>
+                </label>
+              ))
+            ) : (
+              <p className="text-[#4B644A]">No hay resultados para "{searchText}"</p>
+            )}
           </div>
           <div className="mt-1 items-center justify-center flex space-x-4">
             <ButtonAlternative onClick={handleClearAll} text='Limpiar Todo'/>

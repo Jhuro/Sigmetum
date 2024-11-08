@@ -12,7 +12,7 @@ const speciesData =
     "serieType": "Orofito.",
     "vegetationSeries": "Pm-Pc",
     "potentialVegetation": "Pinar",
-    "scientificName": "Pinus sylvestris"
+    "characteristicSpecies": "Pinus sylvestris"
   },
   {
     "image": "https://media.jardineriadelvalles.com/product/higuera-ficus-carica-brown-turkey-800x800.jpg",
@@ -26,7 +26,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qf-Qc",
     "potentialVegetation": "Encinar",
-    "scientificName": "Ficus carica"
+    "characteristicSpecies": "Ficus carica"
   },
   {
     "image": "https://static.inaturalist.org/photos/87326219/large.jpg",
@@ -40,7 +40,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qu-Qf",
     "potentialVegetation": "Matorral",
-    "scientificName": "Rosmarinus officinalis"
+    "characteristicSpecies": "Rosmarinus officinalis"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Den_Italienske_Sti%2C_eneb%C3%A6r.JPG",
@@ -54,7 +54,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qu-Qc",
     "potentialVegetation": "Matorral",
-    "scientificName": "Juniperus communis"
+    "characteristicSpecies": "Juniperus communis"
   },
   {
     "image": "https://www.thecolvinco.com/blog/wp-content/uploads/2018/10/shutterstock_118541248.jpg",
@@ -68,7 +68,7 @@ const speciesData =
     "serieType": "Orofito.",
     "vegetationSeries": "Qf-Rl",
     "potentialVegetation": "Encinar",
-    "scientificName": "Cistus ladanifer"
+    "characteristicSpecies": "Cistus ladanifer"
   },
   {
     "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/13488403/original.jpeg",
@@ -82,7 +82,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Ol-Qc",
     "potentialVegetation": "Olivar",
-    "scientificName": "Cyperus papyrus"
+    "characteristicSpecies": "Cyperus papyrus"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/85/Carrasca_de_la_Raboseras.JPG",
@@ -96,7 +96,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qc-Qf",
     "potentialVegetation": "Alcornocal",
-    "scientificName": "Quercus ilex"
+    "characteristicSpecies": "Quercus ilex"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Pinus_pinea_Wellington_Botanic_Gardens.jpg",
@@ -110,7 +110,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Ql-Pc",
     "potentialVegetation": "Pinar",
-    "scientificName": "Pinus pinea"
+    "characteristicSpecies": "Pinus pinea"
   },
   {
     "image": "https://www.floresyplantas.net/wp-content/uploads/flores-de-bougainvillea-alexandra.jpg",
@@ -124,7 +124,7 @@ const speciesData =
     "serieType": "Orofito.",
     "vegetationSeries": "Pm-Qf",
     "potentialVegetation": "Pinar",
-    "scientificName": "Bougainvillea glabra"
+    "characteristicSpecies": "Bougainvillea glabra"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/43/Vitis_vinifera_001.jpg",
@@ -138,7 +138,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qf-Rl",
     "potentialVegetation": "Viñedo",
-    "scientificName": "Vitis vinifera"
+    "characteristicSpecies": "Vitis vinifera"
   },
   {
     "image": "https://media.plantamus.com/c/product/fresno-comun-fresno-negro-freixo-fraxinus-excelsior-520x520_3bgRUS5.jpg",
@@ -152,7 +152,7 @@ const speciesData =
     "serieType": "Orofito.",
     "vegetationSeries": "Rl-Qc",
     "potentialVegetation": "Fresneda",
-    "scientificName": "Fraxinus excelsior"
+    "characteristicSpecies": "Fraxinus excelsior"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Populus_nigra-bekes.jpg/250px-Populus_nigra-bekes.jpg",
@@ -166,7 +166,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qc-Qf",
     "potentialVegetation": "Alcornocal",
-    "scientificName": "Populus nigra"
+    "characteristicSpecies": "Populus nigra"
   },
   {
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg",
@@ -180,7 +180,7 @@ const speciesData =
     "serieType": "Climatóf.",
     "vegetationSeries": "Qu-Qc",
     "potentialVegetation": "Eucaliptal",
-    "scientificName": "Eucalyptus globulus"
+    "characteristicSpecies": "Eucalyptus globulus"
   },
   {
     "image": "https://media.plantamus.com/c/product/arce-japones-crimson-queen-acer-palmatum-crimson-queen-520x520_wxjdJAd.jpg",
@@ -194,7 +194,7 @@ const speciesData =
     "serieType": "Orofito.",
     "vegetationSeries": "Qf-Rl",
     "potentialVegetation": "Arce",
-    "scientificName": "Acer palmatum"
+    "characteristicSpecies": "Acer palmatum"
   }
 ]
 ;

@@ -5,13 +5,13 @@ import SpeciesAttribute from '../components/SpeciesAttribute.js';
 const Dialog = ({ isOpen, onClose, species}) => {
   if (!isOpen) return null;
 
-  const formattedQuery = encodeURIComponent(species.scientificName);
+  const formattedQuery = encodeURIComponent(species.characteristicSpecies);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0C1811] bg-opacity-70">
       <div className="bg-[#F9FBFA] rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-center px-4 py-2 mx-auto">
-          <h2 className="text-[#4B644A] text-4xl mb-4 italic font-bold">{species.scientificName}</h2>
+          <h2 className="text-[#4B644A] text-4xl mb-4 italic font-bold">{species.characteristicSpecies}</h2>
         </div>
         <div
           className="bg-center bg-no-repeat bg-cover h-80 w-full"

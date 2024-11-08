@@ -21,7 +21,7 @@ const SpeciesCard = ({species}) => {
         ></div>
         <div className="flex flex-col justify-center">
           <p className="text-[#0C1811] text-base italic font-medium leading-normal whitespace-normal overflow-hidden text-ellipsis">
-            {species.scientificName}
+            {species.characteristicSpecies}
           </p>
         </div>
       </div>
