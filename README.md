@@ -4,7 +4,7 @@ This project was made to search for species from a geographical area and other f
 
 ## Pages
 
-In the project directory, you can run:
+In the project directory, you can run: h
 
 ### `Home`
 
