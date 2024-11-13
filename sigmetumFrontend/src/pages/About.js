@@ -20,27 +20,19 @@ const About = () => {
               <p className="text-[#14281D] tracking-light text-[32px] font-bold leading-tight min-w-72">Sobre nosotros</p>
             </div>
             <p className="text-[#14281D] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Descripción del equipo de trabajo, sobre el propósito que tienen, objetivos
             </p>
             <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestra misión</h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Misión
             </p>
             <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestra visión</h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Visión
             </p>
             <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestros valores</h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Valores
             </p>
           </div>
         </div>

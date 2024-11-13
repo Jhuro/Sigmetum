@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ButtonAlternative from './ButtonAlternative';
 import ButtonPrincipal from './ButtonPrincipal';
+import DialogAdvice from './DialogAdvice';
 
 const FileUploadForm = () => {
   const [files, setFiles] = useState([]);
@@ -51,7 +52,8 @@ const FileUploadForm = () => {
       setDialogMessage('Error al subir el archivo. Revisa tu conexión o inténtalo de nuevo.');
       setDialogType('error');
     }
-    setDialogVisible(true); // Mostrar diálogo
+    setDialogVisible(true);
+    
   }
 };
 
@@ -86,17 +88,10 @@ const FileUploadForm = () => {
           <ButtonPrincipal text="Cargar archivos" onClick={handleSubmit}/>
 
           {dialogVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 className={`font-bold ${dialogType === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-              {dialogType === 'success' ? 'Éxito' : 'Error'}
-            </h2>
-            <p className="mt-2">{dialogMessage}</p>
-            <button onClick={closeDialog} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-              Cerrar
-            </button>
-          </div>
-        </div>
+            <DialogAdvice 
+            dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
+            dialogMessage={dialogMessage} 
+            onClose={closeDialog}/>
       )}
       </div>
       </>

@@ -4,19 +4,36 @@ import { Link } from 'react-router-dom';
 import Home from './pages/Home.js';
 import About from './pages/About.js';
 import Explore from './pages/Explore.js';
+import Login from './pages/Login.js';
 import DataManagement from './pages/DataManagement.js';
 import FilesUpload from './pages/FilesUpload.js';
 import Navbar from './components/Navbar.js';
 import Footer from './components/Footer.js';
 import Sidebar from './components/Sidebar.js';
 import Filter from './components/Filter.js';
+import ProtectedRoute from './components/ProtectedRoute.js';
 
-import SpeciesData from './test/TestData.js';
+
 import speciesData from './test/TestData.js';
 
 function App() {
+  const [filteredSpecies, setFilteredSpecies] = useState(speciesData);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
 
-  const [filteredSpecies, setFilteredSpecies] = useState(SpeciesData);
+  const handleFileDropdownSelect = (data) => {
+    setSelectedData(data);
+    setFilteredData(data);
+  };
+
+  const handleFilterDataChange = (filtered) => {
+    setFilteredData((prev) => {
+      if (JSON.stringify(prev) !== JSON.stringify(filtered)) {
+        return filtered;
+      }
+      return prev;
+    });
+  };
 
   const handleFilterChange = (filteredData) => {
     setFilteredSpecies((prev) => {
@@ -32,6 +49,7 @@ function App() {
 
   const menuOptions = [
     { id: 'filtro', name: 'Filtro',  component: <Filter data={speciesData} onFilterChange={handleFilterChange}/>, icon:"filter_alt"},
+    { id: 'dataManagementFilter', name: 'Filtro',  component: <Filter data={selectedData} onFilterChange={handleFilterDataChange}/>, icon:"filter_alt"},
     { id: 'administrarDatos', name: 'Administrar datos', icon:"database", link:"/administrar-datos"},
     { id: 'cargarArchivos', name: 'Cargar archivos', icon:"upload", link:"/cargar-archivos"},
   ];
@@ -58,9 +76,10 @@ function App() {
             <Route exact path="/" element={<Home/>}/>
             <Route path="/explorar" element={<Explore filteredSpecies={filteredSpecies}/>}/>
             <Route path="/sobre-nosotros" element={<About/>}/>
-            <Route path="/cargar-archivos" element={<FilesUpload/>}/>
-            <Route path="/administrar-archivos" element={<FilesUpload/>}/>
-            <Route path="/administrar-datos" element={<DataManagement/>}/>
+            <Route path="/login" element={<Login/>}/>
+
+            <Route path="/cargar-archivos" element={<ProtectedRoute element={<FilesUpload/>}/>}/>
+            <Route path="/administrar-datos" element={<ProtectedRoute element={<DataManagement onFileDropdownSelect={handleFileDropdownSelect} filteredSpecies={filteredData}/>}/>}/>
           </Routes>
         </main>
       </div>

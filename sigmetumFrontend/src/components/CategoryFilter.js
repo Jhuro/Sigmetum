@@ -49,7 +49,7 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
 
       {isExpanded && !blocked && (
         <>
-        <FilterSearchBar placeholderText={categoryNames[category]} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+        <FilterSearchBar placeholderText={categoryNames[category] || category} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
           <div className="space-y-3 py-1">
           {filteredItems.length > 0 ? (
               filteredItems.map((item) => (

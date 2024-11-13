@@ -107,7 +107,7 @@ const Table = ({ data, rowsPerPage = 5  }) => {
       <ButtonPrincipal text="Anterior" onClick={handlePreviousPage} disabled={currentPage === totalPages}/>
 
         <span>Página {currentPage} de {totalPages}</span>
-        <ButtonPrincipal text="Anterior" onClick={handleNextPage} disabled={currentPage === totalPages}/>
+        <ButtonPrincipal text="Siguiente" onClick={handleNextPage} disabled={currentPage === totalPages}/>
       </div>
     </div>
   );

@@ -1,17 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const ButtonPrincipal = ({ onClick, text, dropdownOptions, icon, className}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isIconButton, setIsIconButton] = useState(false);
   const [selectedOption, setSelectedOption] = useState(text);
-
-  useEffect(() => {
-    if (icon) {
-      setIsIconButton(true);
-    } else {
-      setIsIconButton(false);
-    }
-  }, [icon]);
 
   const toggleDropdown = () => {
     if (dropdownOptions) {
@@ -29,7 +20,7 @@ const ButtonPrincipal = ({ onClick, text, dropdownOptions, icon, className}) => 
   return (
     
       <div className="relative inline-block">
-        {isIconButton ?
+        {icon ?
           <button
             onClick={toggleDropdown}
             className={`align-middle flex min-w-[70px] max-w-[84px] min-h-[70px] max-h-[84px] text-[#15B659] hover:text-[#F9FBFA] hover:bg-[#15B659] cursor-pointer items-center justify-center overflow-hidden rounded-xl px-4 sm:h-12 sm:px-5 font-bold leading-normal tracking-[0.015em] sm:font-bold sm:leading-normal sm:tracking-[0.015em] ${className}`}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Dialog from './Dialog';
+import DialogSpecies from './DialogSpecies';
 
 const SpeciesCard = ({species}) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -26,7 +26,7 @@ const SpeciesCard = ({species}) => {
         </div>
       </div>
 
-      <Dialog isOpen={isDialogOpen} onClose={closeDialog} species = {species}/>
+      <DialogSpecies isOpen={isDialogOpen} onClose={closeDialog} species = {species}/>
       </>
   );
 };

@@ -14,12 +14,19 @@ const Sidebar = ({ menuOptions }) => {
       if (location.pathname === '/explorar' && option.id === 'cargarArchivos') {
         return false;
       }
+      if (location.pathname === '/explorar' && option.id === 'dataManagementFilter') {
+        return false;
+      }
       if (location.pathname === '/cargar-archivos' && option.id === 'filtro') {
+        return false;
+      }
+      if (location.pathname === '/cargar-archivos' && option.id === 'dataManagementFilter') {
         return false;
       }
       if (location.pathname === '/administrar-datos' && option.id === 'filtro') {
         return false;
       }
+      
       return true;
     });
 

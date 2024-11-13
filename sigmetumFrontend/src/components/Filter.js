@@ -121,13 +121,17 @@ const Filter = ({ data, onFilterChange }) => {
   const handleFilterChange = (category, item) => {
     setSelectedFilters((prev) => {
       const updatedFilters = { ...prev };
-      const categoryItems = new Set(prev[category] || []);
-      if (categoryItems.has(item)) {
-        categoryItems.delete(item);
+      if (item === 'clear') {
+        updatedFilters[category] = new Set();
       } else {
-        categoryItems.add(item);
+        const categoryItems = new Set(prev[category] || []);
+        if (categoryItems.has(item)) {
+          categoryItems.delete(item);
+        } else {
+          categoryItems.add(item);
+        }
+        updatedFilters[category] = categoryItems;
       }
-      updatedFilters[category] = categoryItems;
       return updatedFilters;
     });
   };
