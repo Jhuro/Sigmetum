@@ -1,25 +1,34 @@
-export const convertToCSV = (data) => {
-  if (data.length === 0) return '';
+import * as XLSX from 'xlsx';
 
-  const headers = Object.keys(data[0]);
-  const csvRows = [
-    headers.join(','),
-    ...data.map(item => headers.map(header => JSON.stringify(item[header], replacer)).join(',')) // Filas
-  ];
+export const convertToXLSX = (data) => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos');
 
-  return csvRows.join('\n');
+  return workbook;
 };
 
-const replacer = (key, value) => value === null ? '' : value;
+export const downloadXLSX = (filteredData) => {
+  const modifiedData = filteredData.map(row => {
+    Object.keys(row).forEach(key => {
+      if (Array.isArray(row[key])) {
+        row[key] = row[key].join(', ');
+      }
+    });
+    return row;
+  });
 
-export const downloadCSV = (filteredData) => {
-  const csv = convertToCSV(filteredData);
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const workbook = convertToXLSX(modifiedData);
+
+  const xlsxBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([xlsxBuffer], { type: 'application/octet-stream' });
+
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
-  link.setAttribute('href', url);
-  link.setAttribute('download', 'data.csv');
+  link.href = url;
+  link.setAttribute('download', 'data.xlsx');
   link.style.visibility = 'hidden';
+
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

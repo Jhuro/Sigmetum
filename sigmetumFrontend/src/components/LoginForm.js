@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonGoogle from "./ButtonGoogle";
 import ButtonPrincipal from "./ButtonPrincipal";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [showLoginError, setLoginError] = useState(false);
 
     const handleLogin = async () => {
       try {
@@ -30,6 +30,7 @@ const LoginForm = () => {
         navigate('/cargar-archivos');
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
+        setLoginError(true);
       }
     };
 
@@ -54,32 +55,37 @@ const LoginForm = () => {
                     <label className="block text-[#0C1811] text-base font-medium mb-2">
                     Contraseña
                     </label>
-                    <div className="relative w-full">
+                    <div className="flex space-x-4 w-full border border-[#15B659] rounded-lg">
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Contraseña"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="form-input w-full h-12 px-3 border border-[#15B659] rounded-lg placeholder:text-[#99BBA8] text-[#0C1811] focus:outline-none"
+                        className="form-input w-full rounded-lg h-12 px-3 placeholder:text-[#99BBA8] bg-[#F9FBFA] text-[#0C1811] focus:outline-none"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#15B659]"
+                        className="text-[#15B659] px-2"
                       >
                         {showPassword ? "Ocultar" : "Mostrar"}
                       </button>
                     </div>
                 </div>
-                <div className="flex justify-center px-4 mb-4">  
-                    <ButtonGoogle text="Iniciar sesión" svg/>
-                </div>
-                <div className="flex justify-center px-4">
-                    
-                    
-                </div>
+                {
+                  showLoginError &&
+                  (
+                    <div className="flex justify-center px-4 mb-4">  
+                      <span className="text-[#15B659] px-2">
+                        Verifique el usuario y/o contraseña
+                      </span>
+                    </div>
+                  )
+                }
                 </form>
-                <ButtonPrincipal text="Iniciar sesión" onClick={ handleLogin }/>
+                <div className="flex justify-center px-4"> 
+                  <ButtonPrincipal text="Iniciar sesión" onClick={ handleLogin }/>
+                </div>
             </div>
     );
 };

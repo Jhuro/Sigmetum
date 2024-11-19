@@ -22,13 +22,24 @@ const FileUploadForm = () => {
 
   const handleFileSelect = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setFiles(selectedFiles);
+
+    const newFiles = selectedFiles.filter(
+      (newFile) => !files.some(
+        (existingFile) => existingFile.name === newFile.name && existingFile.size === newFile.size
+      )
+    );
+  
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  
+    event.target.value = null;
   };
 
   const handleSubmit = async (e) => {
 
+    let allFilesUploadedSuccessfully = true;
+
     for (const file of files) {
-      if (!file) return;
+      if (!file) continue;
 
       const normalizedFileName = normalizeFileName(file.name);
       const formData = new FormData();
@@ -41,21 +52,35 @@ const FileUploadForm = () => {
         });
 
         const result = await response.json();
-      if (response.ok) {
-        setDialogMessage('¡Archivo subido con éxito!');
-        setDialogType('success');
-      } else {
-        setDialogMessage(`Error en la subida: ${result.message || 'Inténtalo de nuevo'}`);
+
+        if (!response.ok) {
+          allFilesUploadedSuccessfully = false;
+          setDialogMessage(`Error en la subida: ${result.message || 'Inténtalo de nuevo'}`);
+          setDialogType('error');
+          setDialogVisible(true);
+          break;
+        }
+      } catch (error) {
+        allFilesUploadedSuccessfully = false;
+        setDialogMessage('Error al subir un archivo. Revisa tu conexión o inténtalo de nuevo.');
         setDialogType('error');
+        setDialogVisible(true);
+        setFiles([]);
+        break;
       }
-    } catch (error) {
-      setDialogMessage('Error al subir el archivo. Revisa tu conexión o inténtalo de nuevo.');
-      setDialogType('error');
     }
-    setDialogVisible(true);
-    
-  }
-};
+
+    if (allFilesUploadedSuccessfully) {
+      setDialogMessage('¡Todos los archivos se subieron con éxito!');
+      setDialogType('success');
+      setDialogVisible(true);
+      setFiles([]);
+    }
+  };
+
+  const handleRemoveFile = (indexToRemove) => {
+    setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToRemove));
+  };
 
   const closeDialog = () => {
     setDialogVisible(false);
@@ -65,7 +90,7 @@ const FileUploadForm = () => {
   return (
 
     <>
-      <div className="flex flex-col items-center gap-4 p-4 border rounded">
+      <div className="flex flex-col items-center gap-4 p-4 border border-[#99BBA8] rounded">
         
         <input
           type="file"
@@ -79,20 +104,32 @@ const FileUploadForm = () => {
         <ButtonAlternative text="Seleccionar archivos" onClick={() => document.getElementById('fileInput').click()}/>
         
         <div className="mt-4">
-          {files.map((file, index) => (
-            <p key={index} className="text-gray-700">{file.name}</p>
-          ))}
+        {files.map((file, index) => (
+          <div key={index} className="flex items-center justify-between text-gray-700 mb-2">
+            <p>{file.name}</p>
+            <button
+              onClick={() => handleRemoveFile(index)}
+              className="text-[#15B659] cursor-pointer"
+            >
+            <span className="material-symbols-outlined text-3xl mx-auto">
+              delete
+            </span>
+          </button>
+          </div>
+        ))}
         </div>
       </div>
       <div className="flex px-4 py-3 justify-center">
-          <ButtonPrincipal text="Cargar archivos" onClick={handleSubmit}/>
-
-          {dialogVisible && (
-            <DialogAdvice 
-            dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
-            dialogMessage={dialogMessage} 
-            onClose={closeDialog}/>
-      )}
+        {files.length > 0 && (
+          <ButtonPrincipal text="Cargar archivos" onClick={handleSubmit} />
+        )}
+          
+        {dialogVisible && (
+          <DialogAdvice 
+          dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
+          dialogMessage={dialogMessage} 
+          onClose={closeDialog}/>
+        )}
       </div>
       </>
   );

@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { getFileFromS3 } = require('../aws/awsS3connect.js');
+const { getMergedDataInS3Folder } = require('../aws/awsS3connect.js');
 
-router.get('/get-data/:path(*)', async (req, res) => {
+router.get('/get-merged-data', async (req, res) => {
     try {
-        const filePath = req.params.path;
-        const jsonData = await getFileFromS3(filePath);
+        const jsonData = await getMergedDataInS3Folder('usedFiles');
         res.json(jsonData);
     } catch (error) {
         console.error(error);

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Home from './pages/Home.js';
 import About from './pages/About.js';
 import Explore from './pages/Explore.js';
+import NotFound from './pages/NotFound.js';
 import Login from './pages/Login.js';
 import DataManagement from './pages/DataManagement.js';
 import FilesUpload from './pages/FilesUpload.js';
@@ -11,19 +12,44 @@ import Navbar from './components/Navbar.js';
 import Footer from './components/Footer.js';
 import Sidebar from './components/Sidebar.js';
 import Filter from './components/Filter.js';
+import LoadSpinner from './components/LoadSpinner';
 import ProtectedRoute from './components/ProtectedRoute.js';
 
-
-import speciesData from './test/TestData.js';
-
 function App() {
-  const [filteredSpecies, setFilteredSpecies] = useState(speciesData);
+  const [isLoading, setIsLoading] = useState(true);
+  const [mergedData, setMergedData] = useState(null);
+  const [filteredSpecies, setFilteredSpecies] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+  const location = useLocation();
+  const showSideMenu = ["/cargar-archivos", "/administrar-datos", "/explorar"].includes(location.pathname);
+  const requireData = ["/explorar"].includes(location.pathname);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/get-merged-data');
+      const result = await response.json();
+      console.log(result);
+      setMergedData(result);
+      setFilteredSpecies(result);
+    setIsLoading(false);
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/explorar') {
+      fetchData();
+    }
+  }, [location.pathname, fetchData]);
 
   const handleFileDropdownSelect = (data) => {
     setSelectedData(data);
     setFilteredData(data);
+    setIsLoading(false);
+
+    console.log(data);
   };
 
   const handleFilterDataChange = (filtered) => {
@@ -44,11 +70,14 @@ function App() {
     });
   };
 
-  const location = useLocation();
-  const showSideMenu = ["/cargar-archivos", "/administrar-archivos", "/administrar-datos", "/explorar"].includes(location.pathname);
+  useEffect(() => {
+    if (requireData) {
+      setIsLoading(true);
+    }
+  }, [location.pathname, requireData]);
 
   const menuOptions = [
-    { id: 'filtro', name: 'Filtro',  component: <Filter data={speciesData} onFilterChange={handleFilterChange}/>, icon:"filter_alt"},
+    { id: 'filtro', name: 'Filtro',  component: <Filter data={mergedData} onFilterChange={handleFilterChange}/>, icon:"filter_alt"},
     { id: 'dataManagementFilter', name: 'Filtro',  component: <Filter data={selectedData} onFilterChange={handleFilterDataChange}/>, icon:"filter_alt"},
     { id: 'administrarDatos', name: 'Administrar datos', icon:"database", link:"/administrar-datos"},
     { id: 'cargarArchivos', name: 'Cargar archivos', icon:"upload", link:"/cargar-archivos"},
@@ -69,15 +98,26 @@ function App() {
       </header>
 
       <div className="flex min-h-screen">
+
         {showSideMenu && <Sidebar menuOptions={menuOptions}/>}
 
         <main className='flex-grow bg-[#F9FBFA]'>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
-            <Route path="/explorar" element={<Explore filteredSpecies={filteredSpecies}/>}/>
+            
+            <Route path="/explorar" 
+            element={isLoading && requireData ?
+              (
+              <div className="flex bg-[#F9FBFA] justify-center items-center min-h-screen">
+                <LoadSpinner />
+              </div>
+              ) : (
+                <Explore data={mergedData} filteredSpecies={filteredSpecies}/>
+              )
+            }/>
             <Route path="/sobre-nosotros" element={<About/>}/>
             <Route path="/login" element={<Login/>}/>
-
+            <Route path="*" element={<NotFound />} />
             <Route path="/cargar-archivos" element={<ProtectedRoute element={<FilesUpload/>}/>}/>
             <Route path="/administrar-datos" element={<ProtectedRoute element={<DataManagement onFileDropdownSelect={handleFileDropdownSelect} filteredSpecies={filteredData}/>}/>}/>
           </Routes>

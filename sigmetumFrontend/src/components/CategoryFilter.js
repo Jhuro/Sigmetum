@@ -5,20 +5,6 @@ import FilterSearchBar from './FilterSearchBar.js';
 const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchText, setSearchText] = useState("");
-  
-  const categoryNames = {
-    province: "Provincia",
-    municipality: "Municipio",
-    averageAltitude: "Altitud Media",
-    biogeographicSector: "Sector Biogeográfico",
-    bioclimaticFloor: "Piso Bioclimático",
-    ombrotype: "Ombrotipo",
-    natureOfSubstrate: "Naturaleza del Sustrato",
-    serieType: "Tipo de Serie",
-    vegetationSeries: "Serie de Vegetación",
-    potentialVegetation: "Vegetación Potencial",
-    characteristicSpecies: "Especies Características"
-  };
 
   const toggleCategory = () => {
     if (!blocked) {
@@ -44,15 +30,18 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
         className={`text-[#0C1811] text-xl font-medium leading-normal pb-2 cursor-pointer ${blocked ? 'text-gray-500' : ''}`}
         onClick={toggleCategory}
       >
-        {categoryNames[category] || category}
+        {category}
       </p>
 
       {isExpanded && !blocked && (
         <>
-        <FilterSearchBar placeholderText={categoryNames[category] || category} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+        <FilterSearchBar placeholderText={category} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
           <div className="space-y-3 py-1">
           {filteredItems.length > 0 ? (
-              filteredItems.map((item) => (
+              [...new Set(
+                filteredItems
+                  .flatMap((item) => (Array.isArray(item) ? item : [item]))
+              )].map((item) => (
                 <label key={item} className="flex items-center cursor-pointer space-x-2">
                   <input
                     type="checkbox"

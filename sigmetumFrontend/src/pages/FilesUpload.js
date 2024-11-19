@@ -1,7 +1,11 @@
 import React from 'react';
 import FileUpload from '../components/FileUpload.js';
+import useTokenExpirationHandler from '../utilities/TokenExpiration.js';
 
 const FilesUpload = () => {
+  const token = localStorage.getItem('token');
+  useTokenExpirationHandler(token);
+
     return (
       <div className="bg-[#F9FBFA] min-h-screen layout-container flex h-full grow flex-col px-2">
         <div className="flex w-full flex-wrap justify-between gap-3 py-4">

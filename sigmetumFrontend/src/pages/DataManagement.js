@@ -1,13 +1,106 @@
-import React from 'react';
+import { React, useState, useRef } from 'react';
 import ButtonAlternative from '../components/ButtonAlternative.js'
 import Table from '../components/Table.js'
 import FileDropdown from '../components/FileDropdown.js';
+import LoadSpinner from '../components/LoadSpinner.js';
+import { downloadXLSX } from '../utilities/CSVfunctions.js';
+import DialogAdvice from '../components/DialogAdvice';
+import useTokenExpirationHandler from '../utilities/TokenExpiration.js';
 
 const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
+  
+  const [fileName, setFileName] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFileSelect = (jsonData) => {
+  const [dialogMessage, setDialogMessage] = useState('');
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogType, setDialogType] = useState('');
+  const fileDropdownRef = useRef(null);
+  const token = localStorage.getItem('token');
+
+  useTokenExpirationHandler(token);
+
+  const handleFileSelect = (jsonData, fileName) => {
     onFileDropdownSelect(jsonData);
-};
+    setFileName(fileName);
+  };
+
+  const resetDropdown = () => {
+    onFileDropdownSelect([]);
+    setFileName(null);
+    if (fileDropdownRef.current) {
+      fileDropdownRef.current.fetchFiles();
+    }
+  };
+
+  const handleFileDelete = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/delete-file', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fileName }),
+    });
+
+      if (!response.ok) {
+        setDialogMessage('Error al eliminar datos. Revisa tu conexión o inténtalo de nuevo.');
+        setDialogType('error');
+        setDialogVisible(true);
+      }
+
+      setDialogMessage('Datos eliminados correctamente.');
+      setDialogType('success');
+      setDialogVisible(true);
+      resetDropdown();
+
+    } catch (error) {
+      setDialogMessage('Error al eliminar datos. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogType('error');
+      setDialogVisible(true);
+    }
+  };
+
+  const handleOnLoad = (state) => {
+    setIsLoading(state);
+  }
+
+  const handleFileUpdate = async () => {
+
+    try {
+      const response = await fetch('http://localhost:8000/update-file', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fileName }),
+    });
+
+      if (!response.ok) {
+        setDialogMessage('Error al actualizar los datos. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogType('error');
+      setDialogVisible(true);
+      }
+
+      if (fileDropdownRef.current) {
+        fileDropdownRef.current.fetchFiles();
+      }
+
+      setDialogMessage('Datos atualizados correctamente.');
+      setDialogType('success');
+      setDialogVisible(true);
+
+    } catch (error) {
+      setDialogMessage('Error al actualizar los datos. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogType('error');
+      setDialogVisible(true);
+    }
+  };
+
+  const closeDialog = () => {
+    setDialogVisible(false);
+    setDialogMessage('');
+  };
 
     return (
       <div className="w-full max-w-screen overflow-hidden px-2">
@@ -24,21 +117,42 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
           </h3>
           <div className="flex justify-stretch w-full">
             <label className="flex flex-col w-full min-w-40 py-3 flex-1">
-                <FileDropdown onFileSelect={handleFileSelect}/>
+                <FileDropdown ref={fileDropdownRef} onLoad={handleOnLoad} onFileSelect={handleFileSelect} selectedFile={fileName}/>
             </label>
-            <div className="flex gap-3 flex-wrap px-4 py-3 justify-end">
-              <ButtonAlternative text="Aplicar cambios" />
-            </div>
-          </div>
-          <div className="flex justify-stretch w-full">
-            
+            {fileName && fileName !== "" && (
+            <>
+              <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
+                <ButtonAlternative onClick={() => {downloadXLSX(filteredSpecies)}} text="Descargar excel" />
+              </div>
+              <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
+                <ButtonAlternative onClick={handleFileDelete} text="Eliminar datos" />
+              </div>
+              <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
+                <ButtonAlternative onClick={handleFileUpdate} text="Restablecer versión" />
+              </div>
+            </>
+            )}
           </div>
           <div className="py-3 w-full overflow-hidden">
+          {isLoading ?
+            (
+              <div className="flex bg-[#F9FBFA] justify-center items-center min-h-screen">
+                <LoadSpinner />
+              </div>
+            ) : (
             <div className="flex w-full max-w-full overflow-hidden">
               <Table data={filteredSpecies}/>
             </div>
+            )
+          }
           </div>
         </div>
+        {dialogVisible && (
+          <DialogAdvice 
+          dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
+          dialogMessage={dialogMessage} 
+          onClose={closeDialog}/>
+        )}
       </div>
     )
 };

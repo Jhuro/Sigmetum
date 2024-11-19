@@ -20,7 +20,6 @@ const UploadButton = () => {
 
   const handleUpload = () => {
     if (file) {
-      console.log('Archivo a subir:', file);
     } else {
       alert('Por favor, selecciona un archivo antes de subir.');
     }

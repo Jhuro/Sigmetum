@@ -4,7 +4,7 @@ const { listFilesInS3Folder } = require('../aws/awsS3connect.js');
 
 router.get('/list-files', async (req, res) => {
     try {
-        const folderName = 'jsonFiles';
+        const folderName = 'backupFiles';
         const files = await listFilesInS3Folder(folderName);
         res.json({ files });
     } catch (error) {
