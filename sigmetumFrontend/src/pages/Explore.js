@@ -3,30 +3,69 @@ import ButtonPrincipal from '../components/ButtonPrincipal';
 import SpeciesCard from '../components/SpeciesCard';
 import { downloadXLSX } from '../utilities/CSVfunctions';
 
-const Explore = ({ data, filteredSpecies }) => {
+const Explore = ({ data, filteredSpecies, selectedSpecies }) => {
   const [uniqueSpecies, setUniqueSpecies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 24;
+  const [itemsPerPage, setItemsPerPage] = useState(24);
 
   useEffect(() => {
     const speciesArray = filteredSpecies
-      .map((item) => item['Especies Características'])
+      .map((item) => item["Especies Características"])
       .flat();
+  
     const uniqueSpeciesSet = new Set(speciesArray);
-    setUniqueSpecies([...uniqueSpeciesSet]);
-  }, [filteredSpecies]);
+  
+    let processedSpecies;
+
+    if (selectedSpecies && selectedSpecies.size > 0) {
+      processedSpecies = Array.from(uniqueSpeciesSet).filter((species) =>
+        selectedSpecies.has(species)
+      );
+    } else {
+      processedSpecies = [...uniqueSpeciesSet];
+    }
+
+    const sortedSpecies = processedSpecies.sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: "base" })
+    );
+  
+    setUniqueSpecies(sortedSpecies);
+    setCurrentPage(1);
+  }, [filteredSpecies, selectedSpecies]);
+
+  useEffect(() => {
+    const calculateItemsPerPage = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth >= 1280) {
+        setItemsPerPage(24);
+      } else if (screenWidth >= 1024) {
+        setItemsPerPage(16);
+      } else if (screenWidth >= 768) {
+        setItemsPerPage(12);
+      } else {
+        setItemsPerPage(8);
+      }
+    };
+
+    calculateItemsPerPage();
+    window.addEventListener("resize", calculateItemsPerPage);
+
+    return () => {
+      window.removeEventListener("resize", calculateItemsPerPage);
+    };
+  }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = uniqueSpecies.slice(indexOfFirstItem, indexOfLastItem);
 
-
   const totalPages = Math.ceil(uniqueSpecies.length / itemsPerPage);
 
   const handlePageChange = (direction) => {
-    if (direction === 'next' && currentPage < totalPages) {
+    if (direction === "next" && currentPage < totalPages) {
       setCurrentPage((prev) => prev + 1);
-    } else if (direction === 'prev' && currentPage > 1) {
+    } else if (direction === "prev" && currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
     }
   };
@@ -55,15 +94,18 @@ const Explore = ({ data, filteredSpecies }) => {
                 <SpeciesCard
                   key={index}
                   data={data}
-                  species={{ ...filteredSpecies, 'Especies Características': species }}
+                  species={{
+                    ...filteredSpecies,
+                    "Especies Características": species,
+                  }}
                 />
               ))}
             </div>
             <div className="flex justify-center items-center mt-4">
-            <ButtonPrincipal
+              <ButtonPrincipal
                 className="disabled:opacity-90"
                 text="Anterior"
-                onClick={() => handlePageChange('prev')}
+                onClick={() => handlePageChange("prev")}
                 disabled={currentPage === 1}
               />
               <span className="text-[#0C1811] text-lg font-semibold mx-2">
@@ -72,7 +114,7 @@ const Explore = ({ data, filteredSpecies }) => {
               <ButtonPrincipal
                 className="disabled:opacity-50"
                 text="Siguiente"
-                onClick={() => handlePageChange('next')}
+                onClick={() => handlePageChange("next")}
                 disabled={currentPage === totalPages}
               />
             </div>

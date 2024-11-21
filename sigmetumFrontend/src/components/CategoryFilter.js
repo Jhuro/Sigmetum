@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ButtonAlternative from './ButtonAlternative.js';
 import FilterSearchBar from './FilterSearchBar.js';
+import { SortItemsList } from '../utilities/SortItemsList.js';
 
 const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -20,9 +21,9 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
     onChange(category, 'clear');
   };
 
-  const filteredItems = items.filter((item) =>
+  const filteredItems = SortItemsList(items.filter((item) =>
     String(item).toLowerCase().includes(searchText.toLowerCase())
-  );
+  ));
 
   return (
     <div className="w-full max-w-md mx-auto bg-[#F9FBFA] rounded-lg shadow-lg p-2 mt-2 mb-2">

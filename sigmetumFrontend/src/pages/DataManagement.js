@@ -34,6 +34,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
   };
 
   const handleFileDelete = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:8000/delete-file', {
         method: 'POST',
@@ -58,6 +59,8 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
       setDialogMessage('Error al eliminar datos. Revisa tu conexión o inténtalo de nuevo.');
       setDialogType('error');
       setDialogVisible(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -66,7 +69,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
   }
 
   const handleFileUpdate = async () => {
-
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:8000/update-file', {
         method: 'POST',
@@ -86,7 +89,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
         fileDropdownRef.current.fetchFiles();
       }
 
-      setDialogMessage('Datos atualizados correctamente.');
+      setDialogMessage('Datos actualizados correctamente.');
       setDialogType('success');
       setDialogVisible(true);
 
@@ -94,6 +97,8 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
       setDialogMessage('Error al actualizar los datos. Revisa tu conexión o inténtalo de nuevo.');
       setDialogType('error');
       setDialogVisible(true);
+    } finally{
+      setIsLoading(false);
     }
   };
 
@@ -103,7 +108,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
   };
 
     return (
-      <div className="w-full max-w-screen overflow-hidden px-2">
+      <div className="w-full max-w-screen px-2">
         <div className="layout-content-container flex flex-col w-full max-w-screen mx-auto">
           <div className="flex w-full flex-wrap justify-between gap-3 py-4">
             <div className="flex min-w-72 flex-col gap-3">

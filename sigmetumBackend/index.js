@@ -8,6 +8,7 @@ const deleteFile = require('./endpoints/deleteFile.js');
 const getMergedData = require('./endpoints/getData.js');
 const login = require('./endpoints/login.js');
 const auth = require('./endpoints/tokenAuth.js');
+const sendMail = require('./endpoints/sendMail.js');
 
 const app = express();
 const PORT = 8000;
@@ -15,6 +16,7 @@ const PORT = 8000;
 app.use(cors());
 app.use(express.json());
 
+app.use(sendMail);
 app.use(deleteFile);
 app.use(updateFile);
 app.use(uploadRoutes);

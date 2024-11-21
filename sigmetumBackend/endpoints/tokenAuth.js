@@ -4,7 +4,7 @@ const { tokenAuth } = require('../functions/tokenAuthentication');
 
 
 router.get('/auth', tokenAuth, (req, res) => {
-    res.json({ message: 'Bienvenido a la sección de administración' });
+    res.status(200).send("Usuario autorizado");
 });
 
 module.exports = router;

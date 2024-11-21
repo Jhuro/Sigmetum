@@ -3,7 +3,7 @@ import ButtonAlternative from './ButtonAlternative';
 import ButtonPrincipal from './ButtonPrincipal';
 import DialogAdvice from './DialogAdvice';
 
-const FileUploadForm = () => {
+const FileUploadForm = ({onLoad}) => {
   const [files, setFiles] = useState([]);
   const [dialogMessage, setDialogMessage] = useState('');
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -35,7 +35,7 @@ const FileUploadForm = () => {
   };
 
   const handleSubmit = async (e) => {
-
+    onLoad(true);
     let allFilesUploadedSuccessfully = true;
 
     for (const file of files) {
@@ -67,6 +67,8 @@ const FileUploadForm = () => {
         setDialogVisible(true);
         setFiles([]);
         break;
+      } finally {
+        onLoad(false);
       }
     }
 
