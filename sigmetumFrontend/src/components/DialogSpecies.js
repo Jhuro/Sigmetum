@@ -2,10 +2,11 @@ import React from 'react';
 import ButtonPrincipal from '../components/ButtonPrincipal.js';
 import SpeciesAttribute from '../components/SpeciesAttribute.js';
 import { SortItemsList } from '../utilities/SortItemsList.js';
+import { useTranslation } from 'react-i18next';
 
 const Dialog = ({ isOpen, onClose, data, species}) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
-
   const formattedQuery = encodeURIComponent(species["Especies Características"]);
 
   const fileterdEspecies = data.filter((item) =>
@@ -98,12 +99,12 @@ const Dialog = ({ isOpen, onClose, data, species}) => {
           rel="noopener noreferrer"
           className="text-[#0C1811] font-bold hover:underline"
         >
-          Leer más
+          {t('explore.dialogSpecies.readMoreLabel')}
         </a>
       </div>
 
       <div className="flex justify-center px-4 py-2 mx-auto mt-4">
-        <ButtonPrincipal onClick={onClose} text="Cerrar" />
+        <ButtonPrincipal onClick={onClose} text={t('explore.dialogSpecies.closeButton')} />
       </div>
     </div>
   </div>

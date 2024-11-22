@@ -1,0 +1,115 @@
+{
+    "navbar": {
+      "homeOption": "Inicio",
+      "exploreOption": "Explorar",
+      "aboutUsOption": "Sobre nosotros"
+    },
+    "footer": {
+      "homeOption": "Inicio",
+      "exploreOption": "Explorar",
+      "aboutUsOption": "Sobre nosotros",
+      "copyright" : "2024 SIGMETUM-A. Todos los derechos reservados."
+    },
+    "home": {
+      "title": "SIGMETUM-A: EXPLORANDO LA VEGETACIÓN DE ANDALUCÍA",
+      "subtitle": "Descubre la riqueza de paisajes vegetales en Andalucía, explorando de manera interactiva",
+      "searchButton" : "Buscar",
+      "descriptionLabel" : "Descripción",
+      "descriptionContent" : "SIGMETU-A es una base de datos interactiva a través de la cual podrás descubrir los diferentes tipos de vegetación de Andalucía mediante criterios geológicos, biogeográficos y bioclimáticos, que te llevarán a identificar la Serie de Vegetación de cualquier territorio regional, así como su formación clímax (etapa madura de cada Serie) y sus especies características.",
+      "contactLabel" : "Contáctenos",
+      "contactContent": "Para ampliar información acerca del proyecto, puede contactar a las siguientes personas:\n\n• Jaime F. Pereña Ortiz. Correo: jperena@uma.es\n• Á, Enrique Salvo Tierra. Correo: salvo@uma.es\n• Andrés V. Pérez Latorre. Correo: avperez@uma.es",
+      "locationLabel": "Nuestra unicación",
+      "locationContent": "Departamento de Botánica y Fisiología Vegetal.\nFacultad de Ciencias (Universidad de Málaga).\nBoulevard Loius Pasteur, 31, 2º planta.\n29010- Málaga",
+      "contactForm": {
+        "nameLabel" : "Nombre",
+        "namePlaceholder" : "Nombre",
+        "emailLabel" : "Correo electrónico",
+        "emailPlaceholder" : "Correo electrónico",
+        "subjectLabel" : "Asunto",
+        "subjectPlaceholder" : "Asunto",
+        "messageLabel" : "Mensaje",
+        "messagePlaceholder" : "Mensaje",
+        "sendButton" : "Enviar"
+      }
+    },
+    "explore": {
+      "noDataFoundPlaceholder": "No hay datos disponibles.",
+      "downloadExcelButton": "Descargar excel",
+      "dialogSpecies": {
+        "readMoreLabel" : "Leer más",
+        "closeButton" : "Cerrar"
+      }
+    },
+    "pagination": {
+      "pageInfo": "Página {{currentPage}} de {{totalPages}}"
+    },
+    "aboutUs": {
+      "title" : "Sobre nosotros",
+      "ourWorkTeam": "El equipo de trabajo de SIGMETUM-A está conformado por un grupo docentes procedentes de diferentes universidades andaluzas (liderados por la Universidad de Málaga), de las áreas de conocimiento de Botánica, Ecología, Geografía, etc, con amplia experiencia en TICs, medio ambiente y ordenación territorial, e implicados en diversas asignaturas y titulaciones a las que aplicar el uso de SIGMETUM-A. Este grupo de docentes se complementa con estudiantes de doctorado, que serán los encargados de testear de manera constante el adecuado funcionamiento del software, y apoyados por entidades empresariales del sector medioambiental, implicados en aplicar la información en sus actividades cotidianas.",
+      "projectPurposeSubtitle": "Propósito del proyecto",
+      "projectPurposeContent": "Con este Proyecto de Innovación Educativa, impulsado por la Universidad de Málaga, se pretende facilitar la enseñanza-aprendizaje de la Geobotánica andaluza en cualquier disciplina relacionada con el Medio Ambiente, así como aportar una herramienta práctica para la aplicación de esta ciencia en proyectos de restauración, recuperación y conservación de la diversidad vegetal.",
+      "ourMissionSubtitle": "Nuestra misión",
+      "ourMissionContent": "Dada la transversalidad del equipo de trabajo, con SIGMETUM-A pretendemos facilitar el estudio de la vegetación a nivel de enseñanzas superiores, así como facilitar el trabajo a profesionales del Medio Ambiente a diferentes escalas, mediante una herramienta que aglutina toda la información ambiental necesaria para una visión global de la vegetación.",
+      "ourValuesSubtitle": "Nuestros valores",
+      "ourValuesContent": "En SIGMETUM-A nuestra principal motivación es formar a futuros profesionales de la gestión ambiental, la restauración de ecosistemas y la conservación de la vegetación, mediante, en primer lugar, un completo aprendizaje de la geobotánica y conocimiento de la vegetación y, posteriormente, una correcta aplicación de las competencias adquiridas, generando una visión integral y pensamiento críticos a la hora de resolver conflictos en el medio natural."
+    },
+    "filter": {
+      "title" : "Filtros",
+      "cleanAllFiltersButton": "Eliminar todos los filtros",
+      "categoryFilter": {
+        "noResultsFoundPlaceholder": "No hay resultados para",
+        "cleanFilterButton": "Limpiar filtro"
+      }
+    },
+    "login": {
+    "title" : "Iniciar sesión",
+    "userLable": "Usuario",
+    "userPlaceholder": "Usuario",
+    "passwordLable": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "passwordShowButton": "Mostrar",
+    "passwordHideButton": "Ocultar",
+    "logInButton": "Iniciar sesión",
+    "unauthorizedLabel": "Verifica el usuario y/o contraeña"
+  },
+  "uploadFiles": {
+    "title" : "Cargar archivos",
+    "fileUploadForm": {
+      "selectFilesButton": "Seleccionar archivos",
+      "uploadFilesButton": "Cargar archivos"
+    }
+  },
+  "dialogAdvice": {
+    "successTitle": "Éxito",
+    "errorTitle": "Error",
+    "successUploadMessage": "Todos los archivos se subieron con éxito.",
+    "successDeleteMessage": "Datos eliminados con éxito.",
+    "successUpdateMessage": "Datos actualizados con éxito.",
+    "errorUploadMessage": "Error al subir un archivo. Inténtalo de nuevo.",
+    "errorDeleteMessage": "Error al eliminar datos. Inténtalo de nuevo.",
+    "errorUpdateMessage": "Error al actualizar los datos. Inténtalo de nuevo.",
+    "closeButton" : "Cerrar"
+  },
+  "dataManagement": {
+    "title" : "Administrar datos",
+    "downloadExcelButton": "Descargar excel",
+    "deleteVersionButton": "Eliminar versión",
+    "updateDataButton": "Actualizar datos",
+    "noDataFoundPlaceholder": "No hay datos disponibles.",
+    "fileSelectDropdwon": {
+      "selectFileDropdownLabel": "Elegir conjunto de datos",
+      "selectFileDropdownPlaceholder": "Elegir conjunto de datos",
+      "provinceTitle" : "Provincia",
+      "versionTitle" : "Versión",
+      "versionPlaceholder" : "Selecciona una provincia para ver las versiones disponibles.",
+      "noDataFoundPlaceholder": "No hay datos disponibles."
+    },
+    "table": {
+      "noDataFoundPlaceholder": "No hay datos disponibles."
+    }
+  },
+  "language":{
+    "spanish" : "Español - ES",
+    "english" : "Inglés - EN"
+  }
+}

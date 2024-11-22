@@ -1,9 +1,13 @@
 import React from 'react';
 import ButtonPrincipal from '../components/ButtonPrincipal.js';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ContactForm from '../components/ContactForm.js';
 
 const Home = () => {
+
+  const { t } = useTranslation();
+
   return (
     <>
         <div className="@container">
@@ -15,40 +19,52 @@ const Home = () => {
           >
               <div className="flex flex-col gap-5 text-left">
                 <h1 className="text-[#F9FBFA] text-4xl font-black leading-tight tracking-[-0.033em] sm:text-6xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]">
-                  Sigmetum - Explora la vegetación por Andalucía
+                  {t('home.title')}
                 </h1>
                 <h2 className="text-[#F9FBFA] text-sm font-normal leading-normal sm:text-2xl sm:font-normal sm:leading-normal">
-                Descubre y visualiza la riqueza de especies en diversas zonas geográficas, explorando la biodiversidad de manera interactiva
+                {t('home.subtitle')}
                 </h2>
                 <Link to="/explorar">
-                  <ButtonPrincipal text='Buscar'/>
+                  <ButtonPrincipal text={t('home.searchButton')}/>
                 </Link>
               </div>
             </div>
         </div>
-        <h2 className="text-2xl font-bold text-left text-[#15B659] tracking-tight px-4 pb-3 pt-5">Contactenos</h2>
+
         <div className="flex w-full">
+          <div className="basis-1/2 p-4 grid grid-cols-1 gap-6">
+            <div className="border-t grid grid-cols-2 border-t-[#14281D] py-5">
+              <p className="text-[#4B644A] text-sm font-normal leading-normal">
+                {t('home.descriptionLabel')}
+              </p>
+              <p className="text-[#0C1811] text-sm font-normal leading-normal">
+                {t('home.descriptionContent')}
+              </p>
+            </div>
 
-        <div className="p-4 grid grid-cols-[20%_1fr] gap-x-6 flex-grow">
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#14281D] py-5">
-            <p className="text-[#4B644A] text-sm font-normal leading-normal">Descripción:</p>
-            <p className="text-[#0C1811] text-sm font-normal leading-normal">Propósito del proyecto</p>
+            <div className="border-t grid grid-cols-2 border-t-[#14281D] py-5">
+              <p className="text-[#4B644A] text-sm font-normal leading-normal">
+              {t('home.contactLabel')}
+              </p>
+              <span className="text-[#0C1811] text-sm font-normal leading-normal whitespace-pre-line">
+                {t('home.contactContent')}
+              </span>
+            </div>
+
+            <div className="border-t grid grid-cols-2 border-t-[#14281D] py-5">
+              <p className="text-[#4B644A] text-sm font-normal leading-normal">
+                {t('home.locationLabel')}
+              </p>
+              <span className="text-[#0C1811] text-sm font-normal leading-normal whitespace-pre-line">
+                {t('home.locationContent')}
+              </span>
+            </div>
           </div>
 
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#14281D] py-5">
-            <p className="text-[#4B644A] text-sm font-normal leading-normal">Contáctenos</p>
-            <span className="text-[#0C1811] text-sm font-normal leading-normal">
-              Email: example@example.com <br />
-              Teléfono: (000) 0000000 ___________ +00 000000000 <br />
-              Nuestra ubicación: _______________
-            </span>
+          <div className="basis-1/2">
+            <ContactForm />
           </div>
         </div>
-
-        <div className="flex-grow">
-          <ContactForm />
-        </div>
-      </div>
     </>
   );
 };

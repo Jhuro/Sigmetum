@@ -1,0 +1,114 @@
+{
+  "navbar": {
+    "homeOption": "Home",
+    "exploreOption": "Explore",
+    "aboutUsOption": "About us"
+  },
+  "footer": {
+    "homeOption": "Home",
+    "exploreOption": "Explore",
+    "aboutUsOption": "About us",
+    "copyright" : "2024 SIGMETUM-A. All rights reserved."
+  },
+  "home": {
+    "title": "SIGMETUM-A: EXPLORING ANDALUSIAN VEGETATION",
+    "subtitle": "Discover the wealth of plant landscapes in Andalusia, exploring in an interactive way",
+    "searchButton" : "Search",
+    "descriptionLabel" : "Description",
+    "descriptionContent" : "SIGMETU-A is an interactive database through which you can discover the different types of vegetation in Andalusia by means of geological, biogeographical and bioclimatic criteria, which will lead you to identify the Vegetation Series of any regional territory, as well as its climax formation (mature stage of each Series) and its characteristic species.",
+    "contactLabel" : "Contact us",
+    "contactContent": "For further information about the project, you can contact the following people at the Department of Botany and Plant Physiology of the University of Malaga:\n\n• Jaime F. Pereña Ortiz. E-mail: jperena@uma.es\n• Á, Enrique Salvo Tierra. E-mail: salvo@uma.es\n• Andrés V. Pérez Latorre. E-mail: avperez@uma.es",
+    "locationLabel": "Our location",
+    "locationContent": "Department of Botany and Plant Physiology.\nFaculty of Science (University of Malaga).\nBoulevard Loius Pasteur, 31, 2nd floor.\n29010- Málaga",
+    "contactForm": {
+      "nameLabel" : "Name",
+      "namePlaceholder" : "Name",
+      "emailLabel" : "E-mail",
+      "emailPlaceholder" : "E-mail",
+      "subjectLabel" : "Subject",
+      "subjectPlaceholder" : "Subject",
+      "messageLabel" : "Message",
+      "messagePlaceholder" : "Message",
+      "sendButton" : "Send"
+    }
+  },
+  "explore": {
+    "noDataFoundPlaceholder": "No data available.",
+    "downloadExcelButton": "Download excel",
+    "dialogSpecies": {
+      "readMoreLabel" : "Read more",
+      "closeButton" : "Close"
+    }
+  },
+  "pagination": {
+    "pageInfo": "Page {{currentPage}} of {{totalPages}}"
+  },
+  "aboutUs": {
+    "title" : "About us",
+    "ourWorkTeam": "The SIGMETUM-A work team is made up of a group of teachers from different Andalusian universities (led by the University of Malaga), from the fields of Botany, Ecology, Geography, etc, with extensive experience in ICT, environment and land use planning, and involved in various subjects and degrees to which the use of SIGMETUM-A can be applied. This group of teachers is complemented by PhD students, who will be in charge of constantly testing the proper functioning of the software, and supported by business entities from the environmental sector, involved in applying the information in their daily activities.",
+    "projectPurposeSubtitle": "Project purpose",
+    "projectPurposeContent": "This Educational Innovation Project, promoted by the University of Malaga, aims to facilitate the teaching-learning of Andalusian Geobotany in any discipline related to the Environment, as well as to provide a practical tool for the application of this science in restoration projects, recovery and conservation of plant diversity.",
+    "ourMissionSubtitle": "Our mission",
+    "ourMissionContent": "Given the transversality of the work team, with SIGMETUM-A we aim to facilitate the study of vegetation at higher education level, as well as to facilitate the work of environmental professionals at different scales, by means of a tool that brings together all the environmental information necessary for a global vision of vegetation.",
+    "ourValuesSubtitle": "Our values",
+    "ourValuesContent": "At SIGMETUM-A our main motivation is to train future professionals in environmental management, ecosystem restoration and vegetation conservation, through, firstly, a complete learning of geobotany and knowledge of vegetation and, subsequently, a correct application of the skills acquired, generating a comprehensive vision and critical thinking when resolving conflicts in the natural environment."
+  },
+  "filter": {
+    "title" : "Filters",
+    "cleanAllFiltersButton": "Clean all filters",
+    "categoryFilter": {
+      "noResultsFoundPlaceholder": "No results for",
+      "cleanFilterButton": "Clean filter"
+    }
+  },
+  "login": {
+    "title" : "Log in",
+    "userLable": "User",
+    "userPlaceholder": "User",
+    "passwordLable": "Password",
+    "passwordPlaceholder": "Password",
+    "passwordShowButton": "Show",
+    "passwordHideButton": "Hide",
+    "logInButton": "Log in",
+    "unauthorizedLabel": "Verify the user and/or password"
+  },
+  "uploadFiles": {
+    "title" : "Upload files",
+    "fileUploadForm": {
+      "selectFilesButton": "Select files",
+      "uploadFilesButton": "Upload files"
+    }
+  },
+  "dialogAdvice": {
+    "successTitle": "Success",
+    "errorTitle": "Error",
+    "successUploadMessage": "All files were uploaded successfully.",
+    "successDeleteMessage": "Data deleted successfully.",
+    "successUpdateMessage": "Data updated successfully.",
+    "errorUploadMessage": "Error uploading file. Please try again.",
+    "errorDeleteMessage": "Error deleting data. Please try again.",
+    "errorUpdateMessage": "Error updating data. Please try again.",
+    "closeButton" : "Close"
+  },
+  "dataManagement": {
+      "title" : "Data management",
+      "downloadExcelButton": "Download excel",
+      "deleteVersionButton": "Delete version",
+      "updateDataButton": "Update data",
+      "fileSelectDropdwon": {
+        "selectFileDropdownLabel": "Choose the dataset",
+        "selectFileDropdownPlaceholder": "Choose the dataset",
+        "provinceTitle" : "Province",
+        "versionTitle" : "Version",
+        "versionPlaceholder" : "Choose a province to see the available versions.",
+        "noDataFoundPlaceholder": "No data available."
+      },
+      "table": {
+        "noDataFoundPlaceholder": "No data available."
+      }
+    },
+    "language":{
+      "spanish" : "Spanish - ES",
+      "english" : "English - EN"
+    }
+}

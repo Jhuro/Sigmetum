@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar.js';
 import Filter from './components/Filter.js';
 import LoadSpinner from './components/LoadSpinner';
 import ProtectedRoute from './components/ProtectedRoute.js';
+import LanguageSwitcher from './components/LanguageSwitcher.js';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,9 +92,10 @@ function App() {
         <Link to="/">
           <div className="flex items-center gap-4">
             <img src='https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png' alt='logo' className="h-14"/>
-            <p className="font-bold text-[#0C1811] text-xl ml-4">SIGMETUM</p>
+            <p className="font-bold text-[#0C1811] text-xl ml-4">SIGMETUM-A</p>
           </div>
         </Link>
+        <LanguageSwitcher/>
           <div className="flex flex-1 justify-end gap-8">
             <Navbar/>
           </div>

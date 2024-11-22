@@ -6,12 +6,12 @@ import LoadSpinner from '../components/LoadSpinner.js';
 import { downloadXLSX } from '../utilities/CSVfunctions.js';
 import DialogAdvice from '../components/DialogAdvice';
 import useTokenExpirationHandler from '../utilities/TokenExpiration.js';
+import { useTranslation } from 'react-i18next';
 
 const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
-  
+  const { t } = useTranslation();
   const [fileName, setFileName] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
   const [dialogMessage, setDialogMessage] = useState('');
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogType, setDialogType] = useState('');
@@ -45,18 +45,18 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
     });
 
       if (!response.ok) {
-        setDialogMessage('Error al eliminar datos. Revisa tu conexión o inténtalo de nuevo.');
+        setDialogMessage(t('dialogAdvice.errorDeleteMessage'));
         setDialogType('error');
         setDialogVisible(true);
       }
 
-      setDialogMessage('Datos eliminados correctamente.');
+      setDialogMessage(t('dialogAdvice.successDeleteMessage'));
       setDialogType('success');
       setDialogVisible(true);
       resetDropdown();
 
     } catch (error) {
-      setDialogMessage('Error al eliminar datos. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogMessage(t('dialogAdvice.errorDeleteMessage'));
       setDialogType('error');
       setDialogVisible(true);
     } finally {
@@ -80,7 +80,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
     });
 
       if (!response.ok) {
-        setDialogMessage('Error al actualizar los datos. Revisa tu conexión o inténtalo de nuevo.');
+        setDialogMessage(t('dialogAdvice.errorUpdateMessage'));
       setDialogType('error');
       setDialogVisible(true);
       }
@@ -89,12 +89,12 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
         fileDropdownRef.current.fetchFiles();
       }
 
-      setDialogMessage('Datos actualizados correctamente.');
+      setDialogMessage(t('dialogAdvice.successUpdateMessage'));;
       setDialogType('success');
       setDialogVisible(true);
 
     } catch (error) {
-      setDialogMessage('Error al actualizar los datos. Revisa tu conexión o inténtalo de nuevo.');
+      setDialogMessage(t('dialogAdvice.errorUpdateMessage'));
       setDialogType('error');
       setDialogVisible(true);
     } finally{
@@ -113,12 +113,12 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
           <div className="flex w-full flex-wrap justify-between gap-3 py-4">
             <div className="flex min-w-72 flex-col gap-3">
               <h2 className="text-[#15B659] tracking-light text-[32px] font-bold leading-tight">
-                Administrar datos
+                {t('dataManagement.title')}
               </h2>
             </div>
           </div>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] pb-2 pt-4">
-            Elegir conjunto de datos
+            {t('dataManagement.fileSelectDropdwon.selectFileDropdownLabel')}
           </h3>
           <div className="flex justify-stretch w-full">
             <label className="flex flex-col w-full min-w-40 py-3 flex-1">
@@ -127,13 +127,13 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
             {fileName && fileName !== "" && (
             <>
               <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
-                <ButtonAlternative onClick={() => {downloadXLSX(filteredSpecies)}} text="Descargar excel" />
+                <ButtonAlternative onClick={() => {downloadXLSX(filteredSpecies)}} text={t('dataManagement.downloadExcelButton')}/>
               </div>
               <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
-                <ButtonAlternative onClick={handleFileDelete} text="Eliminar datos" />
+                <ButtonAlternative onClick={handleFileDelete} text={t('dataManagement.deleteVersionButton')} />
               </div>
               <div className="flex gap-3 flex-wrap px-3 py-3 justify-end">
-                <ButtonAlternative onClick={handleFileUpdate} text="Restablecer versión" />
+                <ButtonAlternative onClick={handleFileUpdate} text={t('dataManagement.updateDataButton')} />
               </div>
             </>
             )}
@@ -154,7 +154,7 @@ const DataManagement = ({onFileDropdownSelect, filteredSpecies}) => {
         </div>
         {dialogVisible && (
           <DialogAdvice 
-          dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
+          dialogTitle={`${dialogType === 'success' ? t('dialogAdvice.successTitle') : t('dialogAdvice.errorTitle')}`}
           dialogMessage={dialogMessage} 
           onClose={closeDialog}/>
         )}

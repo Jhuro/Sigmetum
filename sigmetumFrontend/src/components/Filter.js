@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import CategoryFilter from './CategoryFilter';
 import ButtonAlternative from '../components/ButtonAlternative.js';
+import { useTranslation } from 'react-i18next';
 
 const Filter = ({ data, onFilterChange, onSpeciesSelect }) => {
   const [categories, setCategories] = useState({});
   const [filteredCategories, setFilteredCategories] = useState({});
   const [selectedFilters, setSelectedFilters] = useState({});
   const blockedCategories = useMemo(() => ['image'], []);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const allCategories = {};
@@ -47,6 +49,8 @@ const Filter = ({ data, onFilterChange, onSpeciesSelect }) => {
 
       return updatedFilters;
     });
+
+    console.log(selectedFilters);
   };
 
   useEffect(() => {
@@ -56,23 +60,37 @@ const Filter = ({ data, onFilterChange, onSpeciesSelect }) => {
       if (selectedItems.size > 0) {
         filteredData = filteredData.filter((item) => {
           const itemValue = item[category];
-
+  
           if (Array.isArray(itemValue)) {
             return itemValue.some((value) => selectedItems.has(value));
           }
-
+  
           return selectedItems.has(itemValue);
         });
       }
     });
-
+  
     onSpeciesSelect(selectedFilters["Especies Características"]);
     onFilterChange(filteredData);
 
     const newFilteredCategories = {};
     Object.keys(categories).forEach((cat) => {
       const options = new Set();
-      filteredData.forEach((item) => {
+  
+      let categoryFilteredData = [...data];
+      Object.entries(selectedFilters).forEach(([selectedCategory, selectedItems]) => {
+        if (selectedCategory !== cat && selectedItems.size > 0) {
+          categoryFilteredData = categoryFilteredData.filter((item) => {
+            const itemValue = item[selectedCategory];
+            if (Array.isArray(itemValue)) {
+              return itemValue.some((value) => selectedItems.has(value));
+            }
+            return selectedItems.has(itemValue);
+          });
+        }
+      });
+  
+      categoryFilteredData.forEach((item) => {
         const itemValue = item[cat];
         if (!blockedCategories.includes(cat)) {
           if (Array.isArray(itemValue)) {
@@ -82,9 +100,10 @@ const Filter = ({ data, onFilterChange, onSpeciesSelect }) => {
           }
         }
       });
+  
       newFilteredCategories[cat] = Array.from(options);
     });
-
+  
     setFilteredCategories(newFilteredCategories);
   }, [data, selectedFilters, categories, blockedCategories, onFilterChange, onSpeciesSelect]);
 
@@ -96,10 +115,10 @@ const Filter = ({ data, onFilterChange, onSpeciesSelect }) => {
   return (
     <>
       <h2 className="text-[#0C1811] sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3">
-        Filtros
+        {t('filter.title')}
       </h2>
       <div className="flex justify-center px-4 py-2 mx-auto">
-        <ButtonAlternative onClick={handleClearAllFilters} text="Eliminar todos los filtros" />
+        <ButtonAlternative onClick={handleClearAllFilters} text={t('filter.cleanAllFiltersButton')} />
       </div>
       {Object.entries(filteredCategories).map(([category, items]) => (
         <CategoryFilter

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import ButtonPrincipal from "./ButtonPrincipal";
+import Pagination from "./Pagination";
+import { useTranslation } from 'react-i18next';
 
 const Table = ({ data, rowsPerPage = 5  }) => {
-
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   if (!data || data.length === 0) {
     return (
     <p className="text-[#0C1811] text-lg font-semibold">
-      No hay datos disponibles.
+      {t('dataManagement.table.noDataFoundPlaceholder')}
     </p>
     );
   }
@@ -20,18 +21,6 @@ const Table = ({ data, rowsPerPage = 5  }) => {
   const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
 
   const totalPages = Math.ceil(data.length / rowsPerPage);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <div className="overflow-x-auto w-full">
@@ -60,7 +49,7 @@ const Table = ({ data, rowsPerPage = 5  }) => {
                             row[col].map((item, index) => (
                                 <span key={index}>
                                     {item}
-                                    <br />
+                                    <br/>
                                 </span>
                             ))
                         ) : (
@@ -73,14 +62,17 @@ const Table = ({ data, rowsPerPage = 5  }) => {
         </tbody>
       </table>
 
-      <div className="flex justify-between items-center mt-4">
-
-      <ButtonPrincipal text="Anterior" onClick={handlePreviousPage} disabled={currentPage === totalPages}/>
-          <span className="text-[#0C1811] text-lg font-semibold mx-2">
-            Página {currentPage} de {totalPages}
-          </span>
-        <ButtonPrincipal text="Siguiente" onClick={handleNextPage} disabled={currentPage === totalPages}/>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(direction) => {
+          if (direction === "next" && currentPage < totalPages) {
+            setCurrentPage((prev) => prev + 1);
+          } else if (direction === "prev" && currentPage > 1) {
+            setCurrentPage((prev) => prev - 1);
+          }
+        }}
+      />
     </div>
   );
 };

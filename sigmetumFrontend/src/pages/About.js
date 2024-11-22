@@ -1,6 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+
+  const { t } = useTranslation();
+
   return (
     <div className="bg-[#F9FBFA] relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" >
       <div className="layout-container flex h-full grow flex-col">
@@ -17,22 +21,30 @@ const About = () => {
               </div>
             </div>
             <div className="flex flex-wrap justify-between gap-3 p-4">
-              <p className="text-[#14281D] tracking-light text-[32px] font-bold leading-tight min-w-72">Sobre nosotros</p>
+              <p className="text-[#14281D] tracking-light text-[32px] font-bold leading-tight min-w-72">
+                {t('aboutUs.title')}
+              </p>
             </div>
             <p className="text-[#14281D] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Descripción del equipo de trabajo, sobre el propósito que tienen, objetivos
+              {t('aboutUs.ourWorkTeam')}
             </p>
-            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestra misión</h3>
+            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+              {t('aboutUs.projectPurposeSubtitle')}
+            </h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Misión
+              {t('aboutUs.projectPurposeContent')}
             </p>
-            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestra visión</h3>
+            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+              {t('aboutUs.ourMissionSubtitle')}
+            </h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Visión
+              {t('aboutUs.ourMissionContent')}
             </p>
-            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Nuestros valores</h3>
+            <h3 className="text-[#14281D] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+              {t('aboutUs.ourValuesSubtitle')}
+            </h3>
             <p className="text-[#0C1811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Valores
+              {t('aboutUs.ourValuesContent')}
             </p>
           </div>
         </div>

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import ButtonPrincipal from '../components/ButtonPrincipal';
 import SpeciesCard from '../components/SpeciesCard';
 import { downloadXLSX } from '../utilities/CSVfunctions';
+import { useTranslation } from 'react-i18next';
+import Pagination from '../components/Pagination';
 
 const Explore = ({ data, filteredSpecies, selectedSpecies }) => {
+  const { t } = useTranslation();
   const [uniqueSpecies, setUniqueSpecies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(24);
@@ -75,7 +78,7 @@ const Explore = ({ data, filteredSpecies, selectedSpecies }) => {
       {filteredSpecies.length === 0 ? (
         <div className="flex justify-center items-center min-h-[300px]">
           <p className="text-[#0C1811] text-lg font-semibold">
-            No hay datos disponibles.
+            {t('explore.noDataFoundPlaceholder')}
           </p>
         </div>
       ) : (
@@ -86,7 +89,7 @@ const Explore = ({ data, filteredSpecies, selectedSpecies }) => {
                 onClick={() => {
                   downloadXLSX(filteredSpecies);
                 }}
-                text="Descargar Excel"
+                text={t('explore.downloadExcelButton')}
               />
             </div>
             <div className="grid gap-4 px-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4">
@@ -101,23 +104,12 @@ const Explore = ({ data, filteredSpecies, selectedSpecies }) => {
                 />
               ))}
             </div>
-            <div className="flex justify-center items-center mt-4">
-              <ButtonPrincipal
-                className="disabled:opacity-90"
-                text="Anterior"
-                onClick={() => handlePageChange("prev")}
-                disabled={currentPage === 1}
-              />
-              <span className="text-[#0C1811] text-lg font-semibold mx-2">
-                Página {currentPage} de {totalPages}
-              </span>
-              <ButtonPrincipal
-                className="disabled:opacity-50"
-                text="Siguiente"
-                onClick={() => handlePageChange("next")}
-                disabled={currentPage === totalPages}
-              />
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              t={t}
+            />
           </div>
         </div>
       )}

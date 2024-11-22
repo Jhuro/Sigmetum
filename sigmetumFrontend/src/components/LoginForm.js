@@ -2,11 +2,13 @@ import React from "react";
 import ButtonPrincipal from "./ButtonPrincipal";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [showLoginError, setLoginError] = useState(false);
@@ -37,15 +39,17 @@ const LoginForm = () => {
     return(
 
         <div className="bg-[#F9FBFA] p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
-                <h2 className="text-2xl font-bold text-left text-[#15B659] tracking-tight px-4 pb-3 pt-5">Iniciar sesión</h2>
+                <h2 className="text-2xl font-bold text-left text-[#15B659] tracking-tight px-4 pb-3 pt-5">
+                  {t('login.title')}
+                </h2>
                 <form className="flex flex-col">
                 <div className="mb-4 px-4">
                     <label className="block text-[#111418] text-base font-medium mb-2">
-                    Usuario
+                      {t('login.userLable')}
                     </label>
                     <input
                     type="text"
-                    placeholder="Usuario"
+                    placeholder={t('login.userPlaceholder')}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="form-input w-full h-12 px-3 border border-[#15B659] rounded-lg placeholder:text-[#99BBA8] text-[#0C1811] focus:outline-none"
@@ -53,12 +57,12 @@ const LoginForm = () => {
                 </div>
                 <div className="mb-4 px-4">
                     <label className="block text-[#0C1811] text-base font-medium mb-2">
-                    Contraseña
+                      {t('login.passwordLable')}
                     </label>
                     <div className="flex space-x-4 w-full border border-[#15B659] rounded-lg">
                       <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Contraseña"
+                        placeholder={t('login.passwordPlaceholder')}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="form-input w-full rounded-lg h-12 px-3 placeholder:text-[#99BBA8] bg-[#F9FBFA] text-[#0C1811] focus:outline-none"
@@ -68,7 +72,7 @@ const LoginForm = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-[#15B659] px-2"
                       >
-                        {showPassword ? "Ocultar" : "Mostrar"}
+                        {showPassword ? t('login.passwordHideButton') : t('login.passwordShowButton')}
                       </button>
                     </div>
                 </div>
@@ -77,14 +81,14 @@ const LoginForm = () => {
                   (
                     <div className="flex justify-center px-4 mb-4">  
                       <span className="text-[#15B659] px-2">
-                        Verifique el usuario y/o contraseña
+                        {t('login.unauthorizedLabel')}
                       </span>
                     </div>
                   )
                 }
                 </form>
                 <div className="flex justify-center px-4"> 
-                  <ButtonPrincipal text="Iniciar sesión" onClick={ handleLogin }/>
+                  <ButtonPrincipal text={t('login.logInButton')} onClick={ handleLogin }/>
                 </div>
             </div>
     );

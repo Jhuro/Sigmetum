@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import ButtonAlternative from './ButtonAlternative';
 import ButtonPrincipal from './ButtonPrincipal';
 import DialogAdvice from './DialogAdvice';
+import { useTranslation } from 'react-i18next';
 
 const FileUploadForm = ({onLoad}) => {
+  const { t } = useTranslation();
   const [files, setFiles] = useState([]);
   const [dialogMessage, setDialogMessage] = useState('');
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -51,18 +53,16 @@ const FileUploadForm = ({onLoad}) => {
           body: formData,
         });
 
-        const result = await response.json();
-
         if (!response.ok) {
           allFilesUploadedSuccessfully = false;
-          setDialogMessage(`Error en la subida: ${result.message || 'Inténtalo de nuevo'}`);
+          setDialogMessage(t('dialogAdvice.errorUploadMessage'));
           setDialogType('error');
           setDialogVisible(true);
           break;
         }
       } catch (error) {
         allFilesUploadedSuccessfully = false;
-        setDialogMessage('Error al subir un archivo. Revisa tu conexión o inténtalo de nuevo.');
+        setDialogMessage(t('dialogAdvice.errorUploadMessage'));
         setDialogType('error');
         setDialogVisible(true);
         setFiles([]);
@@ -73,7 +73,7 @@ const FileUploadForm = ({onLoad}) => {
     }
 
     if (allFilesUploadedSuccessfully) {
-      setDialogMessage('¡Todos los archivos se subieron con éxito!');
+      setDialogMessage(t('dialogAdvice.successUploadMessage'));
       setDialogType('success');
       setDialogVisible(true);
       setFiles([]);
@@ -103,7 +103,7 @@ const FileUploadForm = ({onLoad}) => {
           id="fileInput"
         />
         
-        <ButtonAlternative text="Seleccionar archivos" onClick={() => document.getElementById('fileInput').click()}/>
+        <ButtonAlternative text={t('uploadFiles.fileUploadForm.selectFilesButton')} onClick={() => document.getElementById('fileInput').click()}/>
         
         <div className="mt-4">
         {files.map((file, index) => (
@@ -123,12 +123,12 @@ const FileUploadForm = ({onLoad}) => {
       </div>
       <div className="flex px-4 py-3 justify-center">
         {files.length > 0 && (
-          <ButtonPrincipal text="Cargar archivos" onClick={handleSubmit} />
+          <ButtonPrincipal text={t('uploadFiles.fileUploadForm.uploadFilesButton')} onClick={handleSubmit} />
         )}
           
         {dialogVisible && (
           <DialogAdvice 
-          dialogTitle={`${dialogType === 'success' ? 'Éxito' : 'Error'}`}
+          dialogTitle={`${dialogType === 'success' ? t('dialogAdvice.successTitle') : t('dialogAdvice.errorTitle')}`}
           dialogMessage={dialogMessage} 
           onClose={closeDialog}/>
         )}

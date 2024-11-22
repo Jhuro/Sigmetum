@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ButtonAlternative = ({onClick, text, dropdownOptions, icon, className}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,6 +17,10 @@ const ButtonAlternative = ({onClick, text, dropdownOptions, icon, className}) =>
     setIsDropdownOpen(false);
   };
 
+  useEffect(() => {
+    setSelectedOption(text);
+  }, [text]);
+  
   return (
 
     <div className="relative inline-block">

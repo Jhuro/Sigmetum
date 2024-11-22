@@ -2,8 +2,10 @@ import {React, useState} from 'react';
 import FileUpload from '../components/FileUpload.js';
 import LoadSpinner from '../components/LoadSpinner.js';
 import useTokenExpirationHandler from '../utilities/TokenExpiration.js';
+import { useTranslation } from 'react-i18next';
 
 const FilesUpload = () => {
+  const { t } = useTranslation();
   const token = localStorage.getItem('token');
   const [isLoading, setIsLoading] = useState(false);
   useTokenExpirationHandler(token);
@@ -17,7 +19,7 @@ const FilesUpload = () => {
         <div className="flex w-full flex-wrap justify-between gap-3 py-4">
           <div className="flex min-w-72 flex-col gap-3">
             <h2 className="text-[#15B659] tracking-light text-[32px] font-bold leading-tight">
-              Cargar archivos
+              {t('uploadFiles.title')}
             </h2>
           </div>
         </div>

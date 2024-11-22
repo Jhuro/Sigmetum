@@ -1,7 +1,9 @@
 import React from "react";
 import ButtonPrincipal from "./ButtonPrincipal";
+import { useTranslation } from 'react-i18next';
 
 const DialogAdvice = ({onClose, dialogTitle, dialogMessage}) => {
+    const { t } = useTranslation();
 
     return(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0C1811] bg-opacity-70">
@@ -13,7 +15,7 @@ const DialogAdvice = ({onClose, dialogTitle, dialogMessage}) => {
                     <p className="py-2 text-xl">{dialogMessage}</p>
                 </div>
                 <div className="flex justify-center px-4 py-2 mx-auto">
-                <ButtonPrincipal text="Cerrar" onClick={onClose}/>
+                    <ButtonPrincipal text={t('dialogAdvice.closeButton')} onClick={onClose}/>
                 </div>
             </div>
         </div>
