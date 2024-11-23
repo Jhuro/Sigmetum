@@ -37,7 +37,19 @@
       "downloadExcelButton": "Descargar excel",
       "dialogSpecies": {
         "readMoreLabel" : "Leer más",
-        "closeButton" : "Cerrar"
+        "closeButton" : "Cerrar",
+        "attributes": {
+          "province": "Provincia",
+          "municipality": "Municipio",
+          "averageAltitude": "Altitud media",
+          "biogeographicSector": "Sector biogeográfico",
+          "bioclimaticFloor": "Piso bioclimático",
+          "ombrotype": "Ombrotipo",
+          "natureOfSubstrate": "Naturaleza del sustrato",
+          "seriesType": "Tipo de serie",
+          "vegetationSeries": "Serie de vegetación",
+          "potentialVegetation": "Vegetación potencial"
+        }
       }
     },
     "pagination": {
@@ -60,6 +72,19 @@
         "noResultsFoundPlaceholder": "No hay resultados para",
         "cleanFilterButton": "Limpiar filtro"
       }
+    },
+    "attributes": {
+      "Provincia": "Provincia",
+      "Municipio": "Municipio",
+      "Altitud Media": "Altitud media",
+      "Sector Biogeográfico": "Sector biogeográfico",
+      "Piso Bioclimático": "Piso bioclimático",
+      "Ombrotipo": "Ombrotipo",
+      "Naturaleza del Sustrato": "Naturaleza del sustrato",
+      "Tipo de Serie": "Tipo de serie",
+      "Serie de Vegetación": "Serie de vegetación",
+      "Vegetación Potencial": "Vegetación potencial",
+      "Especies Características": "Especies características"
     },
     "login": {
     "title" : "Iniciar sesión",

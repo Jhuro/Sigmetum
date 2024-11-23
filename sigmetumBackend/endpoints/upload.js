@@ -29,7 +29,6 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         const provinciaFolder = `backupFiles/${provincia}`;
 
         const filesInFolder = await listFilesInS3Folder(provinciaFolder);
-        console.log(filesInFolder);
         let version = 1;
 
         filesInFolder.forEach(file => {

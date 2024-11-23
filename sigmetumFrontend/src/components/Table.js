@@ -32,7 +32,7 @@ const Table = ({ data, rowsPerPage = 5  }) => {
                 key={col}
                 className="px-4 py-2 text-left text-sm font-bold text-[#F9FBFA] border-b border-[#99BBA8]"
               >
-                {col.charAt(0).toUpperCase() + col.slice(1)}
+                {t(`attributes.${col}`, col)}
               </th>
             ))}
           </tr>

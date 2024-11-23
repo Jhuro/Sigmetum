@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 
-console.log(JWT_EXPIRATION);
-
 const users = [
   {
     id: 1,
@@ -32,16 +30,13 @@ console.log(encryptPassword(password));
 
 const userAuth = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username + " " + password);
   const user = users.find(u => u.username === username);
   if (!user) {
-    console.log("error en user");
     return res.status(401).json({ message: 'Credenciales incorrectas' });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    console.log("error en password");
     return res.status(401).json({ message: 'Credenciales incorrectas' });
   }
 

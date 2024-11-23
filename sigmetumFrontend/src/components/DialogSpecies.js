@@ -28,7 +28,7 @@ const Dialog = ({ isOpen, onClose, data, species}) => {
       .join(", "),
     natureOfSubstrate: SortItemsList([...new Set(fileterdEspecies.map((item) => item["Naturaleza del Sustrato"]))])
       .join(", "),
-    serieType: SortItemsList([...new Set(fileterdEspecies.map((item) => item["Tipo de Serie"]))])
+    seriesType: SortItemsList([...new Set(fileterdEspecies.map((item) => item["Tipo de Serie"]))])
       .join(", "),
     vegetationSeries: SortItemsList([...new Set(fileterdEspecies.map((item) => item["Serie de Vegetación"]))])
       .join(", "),
@@ -80,16 +80,13 @@ const Dialog = ({ isOpen, onClose, data, species}) => {
       }
 
       <div className="p-4 grid grid-cols-2 gap-4 overflow-y-auto flex-grow">
-        <SpeciesAttribute title="Provincia" description={uniqueAttributes.province} />
-        <SpeciesAttribute title="Municipio" description={uniqueAttributes.municipality} />
-        <SpeciesAttribute title="Altitud media" description={uniqueAttributes.averageAltitude} />
-        <SpeciesAttribute title="Sector biogeográfico" description={uniqueAttributes.biogeographicSector} />
-        <SpeciesAttribute title="Piso bioclimático" description={uniqueAttributes.bioclimaticFloor} />
-        <SpeciesAttribute title="Ombrotipo" description={uniqueAttributes.ombrotype} />
-        <SpeciesAttribute title="Serie del sustrato" description={uniqueAttributes.natureOfSubstrate} />
-        <SpeciesAttribute title="Tipo de serie" description={uniqueAttributes.serieType} />
-        <SpeciesAttribute title="Serie de vegetación" description={uniqueAttributes.vegetationSeries} />
-        <SpeciesAttribute title="Vegetación potencial" description={uniqueAttributes.potentialVegetation} />
+        {Object.entries(uniqueAttributes).map(([key, value]) => (
+          <SpeciesAttribute
+            key={key}
+            title={t(`explore.dialogSpecies.attributes.${key}`, key)}
+            description={value}
+          />
+        ))}
       </div>
 
       <div className="flex justify-center px-4 py-2 mx-auto">

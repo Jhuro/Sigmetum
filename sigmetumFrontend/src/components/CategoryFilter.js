@@ -33,12 +33,12 @@ const CategoryFilter = ({ category, items, blocked, onChange, selected }) => {
         className={`text-[#0C1811] text-xl font-medium leading-normal pb-2 cursor-pointer ${blocked ? 'text-gray-500' : ''}`}
         onClick={toggleCategory}
       >
-        {category}
+        {t(`attributes.${category}`, category)}
       </p>
 
       {isExpanded && !blocked && (
         <>
-        <FilterSearchBar placeholderText={category} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+        <FilterSearchBar placeholderText={t(`attributes.${category}`, category)} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
           <div className="space-y-3 py-1">
           {filteredItems.length > 0 ? (
               [...new Set(

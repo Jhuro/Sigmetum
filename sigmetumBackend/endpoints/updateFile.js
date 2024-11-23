@@ -5,7 +5,6 @@ const { updateFileS3 } = require('../aws/awsS3connect.js');
 router.post('/update-file', async (req, res) => {
     try {
         const { fileName } = req.body;
-        console.log(fileName);
         const match = fileName.match(/\/([^/]+)\//);
         const folderName = match ? match[1] : null;
 
